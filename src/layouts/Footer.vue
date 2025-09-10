@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6">
-          © {{ currentYear }} Paysol Admin Portal
+          © {{ currentYear }} Customer Relationship Management Dashboard
         </div>
         <div class="col-sm-6">
           <div class="text-sm-end d-sm-block">
@@ -20,7 +20,7 @@ export default {
   name: 'Footer',
   setup() {
     const currentYear = new Date().getFullYear()
-    const businessName = 'Drip Nation Main Branch'
+    const businessName = 'CS Payments'
     const branchName = ''
 
     return {

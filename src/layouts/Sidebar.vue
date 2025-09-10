@@ -41,30 +41,57 @@
                             <!-- Tooltip/Caption: Configure homepage content, hero sections, and landing page elements -->
                         </li>
 
+                        <!-- Blog Management -->
+                        <li class="" :class="{ 'mm-active': isActiveParent(['/blog/articles', '/blog/categories', '/blog/create', '/blog/tags']) }">
+                            <a href="javascript: void(0);" class="waves-effect has-arrow">
+                                <i class="bx bx-detail"></i>
+                                <span>Blog</span>
+                            </a>
+                            <!-- Tooltip/Caption: Manage blog content, articles, and publications -->
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li :class="{ active: isCurrentPage('/blog/articles') }">
+                                    <router-link to="/blog/articles" class="waves-effect" :class="{ active: isCurrentPage('/blog/articles') }">All Articles</router-link>
+                                    <!-- Tooltip: View and manage all published and draft articles -->
+                                </li>
+                                <li :class="{ active: isCurrentPage('/blog/create') }">
+                                    <router-link to="/blog/create" class="waves-effect" :class="{ active: isCurrentPage('/blog/create') }">Create Article</router-link>
+                                    <!-- Tooltip: Write and publish new blog articles -->
+                                </li>
+                                <li :class="{ active: isCurrentPage('/blog/categories') }">
+                                    <router-link to="/blog/categories" class="waves-effect" :class="{ active: isCurrentPage('/blog/categories') }">Categories</router-link>
+                                    <!-- Tooltip: Organize articles by topics and categories -->
+                                </li>
+                                <li :class="{ active: isCurrentPage('/blog/tags') }">
+                                    <router-link to="/blog/tags" class="waves-effect" :class="{ active: isCurrentPage('/blog/tags') }">Tags</router-link>
+                                    <!-- Tooltip: Manage article tags and keywords -->
+                                </li>
+                            </ul>
+                        </li>
+
                         <!-- Partners Management -->
-                      <li class="" :class="{ active: isActiveParent(['/partners/list', '/partners/categories', '/partners/add']) }">
+                      <li class="" :class="{ 'mm-active': isActiveParent(['/partners/list', '/partners/categories', '/partners/add']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="mdi mdi-account-group-outline"></i>
                                 <span>Partners</span>
                             </a>
                             <!-- Tooltip/Caption: Manage business partnerships and collaborations -->
                             <ul class="sub-menu" aria-expanded="false">
-                                <li :class="{ active: isCurrentPage('/PatnerList') }">
-                                    <router-link to="/partners/list">All Partners</router-link>
+                                <li :class="{ active: isCurrentPage('/partners/list') }">
+                                    <router-link to="/partners/list" class="waves-effect" :class="{ active: isCurrentPage('/partners/list') }">All Partners</router-link>
                                     <!-- Tooltip: View and manage your business partners -->
                                 </li>
                                 <li :class="{ active: isCurrentPage('/partners/categories') }">
-                                    <router-link to="/partners/categories">Partner Types</router-link>
+                                    <router-link to="/partners/categories" class="waves-effect" :class="{ active: isCurrentPage('/partners/categories') }">Partner Types</router-link>
                                     <!-- Tooltip: Organize partners by categories and classifications -->
                                 </li>
                                 <li :class="{ active: isCurrentPage('/partners/add') }">
-                                    <router-link to="/partners/add">Add Partner</router-link>
+                                    <router-link to="/partners/add" class="waves-effect" :class="{ active: isCurrentPage('/partners/add') }">Add Partner</router-link>
                                     <!-- Tooltip: Create new business partnership -->
                                 </li>
                             </ul>
                         </li>
                         <!-- Product Catalog Management -->
-                        <li class="" :class="{ active: isActiveParent(['/products/catalog', '/products/add']) }">
+                        <li class="" :class="{ 'mm-active': isActiveParent(['/products/catalog', '/products/add']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="mdi mdi-package-variant-closed"></i>
                                 <span>Product Catalog</span>
@@ -72,18 +99,18 @@
                             <!-- Tooltip/Caption: Manage your product inventory and catalog -->
                             <ul class="sub-menu" aria-expanded="false">
                                 <li :class="{ active: isCurrentPage('/products/catalog') }">
-                                    <router-link to="/products/catalog">Product Catalog</router-link>
+                                    <router-link to="/products/catalog" class="waves-effect" :class="{ active: isCurrentPage('/products/catalog') }">Product Catalog</router-link>
                                     <!-- Tooltip: Browse and edit your complete product catalog -->
                                 </li>
                                 <li :class="{ active: isCurrentPage('/products/add') }">
-                                    <router-link to="/products/add">Add Product</router-link>
+                                    <router-link to="/products/add" class="waves-effect" :class="{ active: isCurrentPage('/products/add') }">Add Product</router-link>
                                     <!-- Tooltip: Create new product listings -->
                                 </li>
                             </ul>
                         </li>
 
                         <!-- Media Gallery -->
-                        <li class="" :class="{ active: isActiveParent(['/gallery/view', '/gallery/upload']) }">
+                        <li class="" :class="{ 'mm-active': isActiveParent(['/gallery/view', '/gallery/upload', '/gallery/categories']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="mdi mdi-image-multiple-outline"></i>
                                 <span>Media Gallery</span>
@@ -91,16 +118,16 @@
                             <!-- Tooltip/Caption: Manage images and media assets -->
                             <ul class="sub-menu" aria-expanded="false">
                                 <li :class="{ active: isCurrentPage('/gallery/view') }">
-                                    <router-link to="/gallery/view">Media Library</router-link>
+                                    <router-link to="/gallery/view" class="waves-effect" :class="{ active: isCurrentPage('/gallery/view') }">Media Library</router-link>
                                     <!-- Tooltip: Browse and organize your media files -->
                                 </li>
                                 <li :class="{ active: isCurrentPage('/gallery/upload') }">
-                                    <router-link to="/gallery/upload">Upload Media</router-link>
+                                    <router-link to="/gallery/upload" class="waves-effect" :class="{ active: isCurrentPage('/gallery/upload') }">Upload Media</router-link>
                                     <!-- Tooltip: Add new images and media files -->
                                 </li>
-                                 <li :class="{ active: isCurrentPage('/gallery/upload') }">
-                                    <router-link to="/gallery/upload">Media Category</router-link>
-                                    <!-- Tooltip: Add new images and media files -->
+                                 <li :class="{ active: isCurrentPage('/gallery/categories') }">
+                                    <router-link to="/gallery/categories" class="waves-effect" :class="{ active: isCurrentPage('/gallery/categories') }">Media Categories</router-link>
+                                    <!-- Tooltip: Organize media by categories -->
                                 </li>
                             </ul>
                         </li>
@@ -112,27 +139,27 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li :class="{ active: isCurrentPage('material-stock.html') }">
-                                    <a href="material-stock.html">Stock Taking</a>
+                                    <a href="material-stock.html" class="waves-effect" :class="{ active: isCurrentPage('material-stock.html') }">Stock Taking</a>
                                 </li>
                                 <li :class="{ active: isCurrentPage('material-new.html') }">
-                                    <a href="material-new.html">Add New Material</a>
+                                    <a href="material-new.html" class="waves-effect" :class="{ active: isCurrentPage('material-new.html') }">Add New Material</a>
                                 </li>
                                 <li :class="{ active: isCurrentPage('materials-all.html') }">
-                                    <a href="materials-all.html">All Materials/Ingredients</a>
+                                    <a href="materials-all.html" class="waves-effect" :class="{ active: isCurrentPage('materials-all.html') }">All Materials/Ingredients</a>
                                 </li>
                             </ul>
                         </li>
-                        <li :class="{ 'mm-active': isActiveParent(['/MenuProducts', 'production-item-new.html', '/MenuCategories', 'production-all-products.html']) }">
+                        <li :class="{ 'mm-active': isActiveParent(['/MenuProducts', '/MenuCategories']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="bx bx-restaurant"></i>
                                 <span>Menu Items</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">                               
                                 <li :class="{ active: isCurrentPage('/MenuProducts') }">
-                                    <router-link to="/MenuProducts" class="waves-effect" :class="{ active: isActive('/MenuProducts') }">Products</router-link>
+                                    <router-link to="/MenuProducts" class="waves-effect" :class="{ active: isCurrentPage('/MenuProducts') }">Products</router-link>
                                 </li>
                                 <li :class="{ active: isCurrentPage('/MenuCategories') }">
-                                    <router-link to="/MenuCategories" class="waves-effect" :class="{ active: isActive('/MenuCategories') }">Catalogue/Categories</router-link> 
+                                    <router-link to="/MenuCategories" class="waves-effect" :class="{ active: isCurrentPage('/MenuCategories') }">Catalogue/Categories</router-link> 
                                 </li>
                                 <li class="d-none" :class="{ active: isCurrentPage('production-all-products.html') }">
                                     <a href="production-all-products.html">Catalogue/Categories</a>
@@ -142,20 +169,20 @@
 
                         <hr class="">
                         <li class="menu-title" key="t-apps">Reports</li>
-                        <li :class="{ active: isActiveParent(['product-reports.html', 'product-orders.html', 'product-sales.html']) }">
+                        <li :class="{ 'mm-active': isActiveParent(['product-reports.html', 'product-orders.html', 'product-sales.html']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="bx bx-cart"></i>
                                 <span>Product Sales</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li :class="{ active: isCurrentPage('product-reports.html') }">
-                                    <a href="product-reports.html">Sales Reports</a>
+                                    <a href="product-reports.html" class="waves-effect" :class="{ active: isCurrentPage('product-reports.html') }">Sales Reports</a>
                                 </li>
                                 <li :class="{ active: isCurrentPage('product-orders.html') }">
-                                    <a href="product-orders.html">Pending Payments</a>
+                                    <a href="product-orders.html" class="waves-effect" :class="{ active: isCurrentPage('product-orders.html') }">Pending Payments</a>
                                 </li>
                                 <li :class="{ active: isCurrentPage('product-sales.html') }">
-                                    <a href="product-sales.html">Product Performance</a>
+                                    <a href="product-sales.html" class="waves-effect" :class="{ active: isCurrentPage('product-sales.html') }">Product Performance</a>
                                 </li>
                             </ul>
                         </li>
@@ -165,31 +192,31 @@
                                 <span>Cashier Sales Reports</span>
                             </a>
                         </li>
-                        <li class="d-none" :class="{ active: isActiveParent(['cashier-sales.html', 'cashier-logs.html']) }">
+                        <li class="d-none" :class="{ 'mm-active': isActiveParent(['cashier-sales.html', 'cashier-logs.html']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="mdi mdi-account-cash-outline"></i>
                                 <span>Cashier Reports</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li :class="{ active: isCurrentPage('cashier-sales.html') }">
-                                    <a href="cashier-sales.html">Cashier Sales</a>
+                                    <a href="cashier-sales.html" class="waves-effect" :class="{ active: isCurrentPage('cashier-sales.html') }">Cashier Sales</a>
                                 </li>
                                 <li :class="{ active: isCurrentPage('cashier-logs.html') }">
-                                    <a href="cashier-logs.html">Cashier Logs</a>
+                                    <a href="cashier-logs.html" class="waves-effect" :class="{ active: isCurrentPage('cashier-logs.html') }">Cashier Logs</a>
                                 </li>
                             </ul>
                         </li>
-                        <li :class="{ active: isActiveParent(['materials-stock-reports.html', 'products-stock-reports.html']) }">
+                        <li :class="{ 'mm-active': isActiveParent(['materials-stock-reports.html', 'products-stock-reports.html']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="bx bx-store-alt"></i>
                                 <span>Stock Movement</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li :class="{ active: isCurrentPage('materials-stock-reports.html') }">
-                                    <a href="materials-stock-reports.html">Materials/Ingredients Stk</a>
+                                    <a href="materials-stock-reports.html" class="waves-effect" :class="{ active: isCurrentPage('materials-stock-reports.html') }">Materials/Ingredients Stk</a>
                                 </li>
                                 <li :class="{ active: isCurrentPage('products-stock-reports.html') }">
-                                    <a href="products-stock-reports.html">Products Stock</a>
+                                    <a href="products-stock-reports.html" class="waves-effect" :class="{ active: isCurrentPage('products-stock-reports.html') }">Products Stock</a>
                                 </li>
                             </ul>
                         </li>
@@ -217,7 +244,7 @@
                                 <span>Sent Messages</span>
                             </a>
                         </li>
-                        <li :class="{ active: isActiveParent(['messanger-contacts.html']) }">
+                        <li :class="{ 'mm-active': isActiveParent(['messanger-contacts.html']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="mdi mdi-account-details-outline"></i>
                                 <span>Address Book</span>
@@ -227,24 +254,24 @@
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#add-contact" class="btn btn-info text-center mx-4 px-3 text-white  mb-3"><i class="mdi mdi-account-multiple-plus-outline text-white m-0 p-0"></i>Add Contact</a>
                                 </li>
                                 <li :class="{ active: isCurrentPage('messanger-contacts.html') }">
-                                    <a href="messanger-contacts.html">Contact Book list</a>
+                                    <a href="messanger-contacts.html" class="waves-effect" :class="{ active: isCurrentPage('messanger-contacts.html') }">Contact Book list</a>
                                 </li>
                             </ul>
                         </li>
                        
                         <hr class="">
 
-                        <li class="d-none" :class="{ active: isActiveParent(['branch-new.html', 'branch-all.html']) }">
+                        <li class="d-none" :class="{ 'mm-active': isActiveParent(['branch-new.html', 'branch-all.html']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="mdi mdi-domain"></i>
                                 <span>Branches</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li :class="{ active: isCurrentPage('branch-new.html') }">
-                                    <a href="branch-new.html">Add A Branch</a>
+                                    <a href="branch-new.html" class="waves-effect" :class="{ active: isCurrentPage('branch-new.html') }">Add A Branch</a>
                                 </li>
                                 <li :class="{ active: isCurrentPage('branch-all.html') }">
-                                    <a href="branch-all.html">All Branches</a>
+                                    <a href="branch-all.html" class="waves-effect" :class="{ active: isCurrentPage('branch-all.html') }">All Branches</a>
                                 </li>
                             </ul>
                         </li>
@@ -256,17 +283,17 @@
                             </a>
                         </li>
 
-                        <li :class="{ active: isActiveParent(['user-userlist.html', 'user-registration.html']) }">
+                        <li :class="{ 'mm-active': isActiveParent(['user-userlist.html', 'user-registration.html']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="mdi mdi-monitor-multiple"></i>
                                 <span>System Users</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li :class="{ active: isCurrentPage('user-userlist.html') }">
-                                    <a href="user-userlist.html">System Users</a>
+                                    <a href="user-userlist.html" class="waves-effect" :class="{ active: isCurrentPage('user-userlist.html') }">System Users</a>
                                 </li>
                                 <li :class="{ active: isCurrentPage('user-registration.html') }">
-                                    <a href="user-registration.html">Add a system user</a>
+                                    <a href="user-registration.html" class="waves-effect" :class="{ active: isCurrentPage('user-registration.html') }">Add a system user</a>
                                 </li>
                             </ul>
                         </li>
