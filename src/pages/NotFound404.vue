@@ -20,11 +20,11 @@
             404 — Page Not Found
           </h2>
           <p class="text-muted mb-4 fs-5 position-relative">
-            The page you're looking for doesn’t seem to exist — or maybe it took
+            The page you're looking for doesn't seem to exist — or maybe it took
             a wrong turn somewhere.
           </p>
           <p class="text-muted mb-4 fs-6 position-relative">
-            Double-check the URL or head back home. We’ll help you get back on
+            Double-check the URL or head back home. We'll help you get back on
             track!
           </p>
 
@@ -56,6 +56,23 @@
 <script>
 export default {
   name: "notFound",
+  meta: { title: '404 — Page Not Found' },
+  
+  // Option 1: Using mounted lifecycle hook
+  mounted() {
+    document.title = '404 — Page Not Found';
+  },
+  
+  // Option 2: Using beforeRouteEnter (if using Vue Router)
+  beforeRouteEnter(to, from, next) {
+    document.title = '404 — Page Not Found';
+    next();
+  },
+  
+  // Option 3: Using created lifecycle hook
+  created() {
+    document.title = '404 — Page Not Found';
+  }
 };
 </script>
 

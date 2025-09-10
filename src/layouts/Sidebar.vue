@@ -8,7 +8,7 @@
                 <div id="sidebar-menu">
                     <!-- Left Menu Start -->
                     <ul class="metismenu list-unstyled" id="side-menu">
-                        <li class="menu-title" key="t-apps">John & Jo's Restaurant</li>
+                        <li class="menu-title d-none" key="t-apps">Website Content</li>
                         <li class="side-bar-button d-none">
                             <a href="#" class="waves-effect btn btn-light btn-rounded text-left write-msg-btn">
                                 <i class=""><img src="../assets/images/plus-icon.svg" alt=""></i>
@@ -22,7 +22,89 @@
                             </router-link>
                         </li>
 
-                        <li class="menu-title" key="t-apps">Production Unit</li>
+                        <li class="menu-title" key="t-apps">Website Content/Pages</li>
+                        <!-- Website Identity & Branding -->
+                        <li :class="{ active: isActive('/site-identity') }">
+                            <router-link to="/site-identity" class="waves-effect" :class="{ active: isActive('/site-identity') }">
+                                <i class="mdi mdi-domain"></i>
+                                <span>Site Identity</span>
+                            </router-link>
+                            <!-- Tooltip/Caption: Manage your brand identity, logo, and company information -->
+                        </li>
+
+                        <!-- Homepage Management -->
+                        <li :class="{ active: isActive('/hero-landing') }">
+                            <router-link to="/hero-landing" class="waves-effect" :class="{ active: isActive('/hero-landing') }">
+                                <i class="mdi mdi-home-variant-outline"></i>
+                                <span>Homepage</span>
+                            </router-link>
+                            <!-- Tooltip/Caption: Configure homepage content, hero sections, and landing page elements -->
+                        </li>
+
+                        <!-- Partners Management -->
+                      <li class="" :class="{ active: isActiveParent(['/partners/list', '/partners/categories', '/partners/add']) }">
+                            <a href="javascript: void(0);" class="waves-effect has-arrow">
+                                <i class="mdi mdi-account-group-outline"></i>
+                                <span>Partners</span>
+                            </a>
+                            <!-- Tooltip/Caption: Manage business partnerships and collaborations -->
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li :class="{ active: isCurrentPage('/PatnerList') }">
+                                    <router-link to="/partners/list">All Partners</router-link>
+                                    <!-- Tooltip: View and manage your business partners -->
+                                </li>
+                                <li :class="{ active: isCurrentPage('/partners/categories') }">
+                                    <router-link to="/partners/categories">Partner Types</router-link>
+                                    <!-- Tooltip: Organize partners by categories and classifications -->
+                                </li>
+                                <li :class="{ active: isCurrentPage('/partners/add') }">
+                                    <router-link to="/partners/add">Add Partner</router-link>
+                                    <!-- Tooltip: Create new business partnership -->
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Product Catalog Management -->
+                        <li class="" :class="{ active: isActiveParent(['/products/catalog', '/products/add']) }">
+                            <a href="javascript: void(0);" class="waves-effect has-arrow">
+                                <i class="mdi mdi-package-variant-closed"></i>
+                                <span>Product Catalog</span>
+                            </a>
+                            <!-- Tooltip/Caption: Manage your product inventory and catalog -->
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li :class="{ active: isCurrentPage('/products/catalog') }">
+                                    <router-link to="/products/catalog">Product Catalog</router-link>
+                                    <!-- Tooltip: Browse and edit your complete product catalog -->
+                                </li>
+                                <li :class="{ active: isCurrentPage('/products/add') }">
+                                    <router-link to="/products/add">Add Product</router-link>
+                                    <!-- Tooltip: Create new product listings -->
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Media Gallery -->
+                        <li class="" :class="{ active: isActiveParent(['/gallery/view', '/gallery/upload']) }">
+                            <a href="javascript: void(0);" class="waves-effect has-arrow">
+                                <i class="mdi mdi-image-multiple-outline"></i>
+                                <span>Media Gallery</span>
+                            </a>
+                            <!-- Tooltip/Caption: Manage images and media assets -->
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li :class="{ active: isCurrentPage('/gallery/view') }">
+                                    <router-link to="/gallery/view">Media Library</router-link>
+                                    <!-- Tooltip: Browse and organize your media files -->
+                                </li>
+                                <li :class="{ active: isCurrentPage('/gallery/upload') }">
+                                    <router-link to="/gallery/upload">Upload Media</router-link>
+                                    <!-- Tooltip: Add new images and media files -->
+                                </li>
+                                 <li :class="{ active: isCurrentPage('/gallery/upload') }">
+                                    <router-link to="/gallery/upload">Media Category</router-link>
+                                    <!-- Tooltip: Add new images and media files -->
+                                </li>
+                            </ul>
+                        </li>
+                        <hr>
                         <li :class="{ 'mm-active': isActiveParent(['material-stock.html', 'material-new.html', 'materials-all.html']) }">
                             <a href="javascript: void(0);" class="waves-effect has-arrow">
                                 <i class="mdi mdi-chef-hat"></i>

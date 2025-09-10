@@ -3,11 +3,12 @@
             }
             
             body[data-sidebar=dark] .mm-active .active i {
-                color: #2fb895!important;
+                color:#63b1fc !important;
             }
             
             body[data-sidebar=dark] .mm-active .active {
-                color: #2fb895!important;
+                color: #63b1fc !important;
+                font-weight: 600;
             }
             
             .breadcrumb-item+.breadcrumb-item::before {
@@ -1650,5 +1651,11 @@ position: relative;
     height: 100%;
     background:linear-gradient(to left, rgb(248 249 250), rgb(248 249 250 / 12%));
     pointer-events: none;
+}
+#side-menu hr{
+height: 1px;
+opacity: 0.2;
+color: white;
+background-color: white;
 }
 
