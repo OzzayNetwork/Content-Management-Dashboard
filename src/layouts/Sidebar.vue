@@ -32,6 +32,14 @@
                             <!-- Tooltip/Caption: Manage your brand identity, logo, and company information -->
                         </li>
 
+                        <li :class="{ active: isActive('/hero-landing') }">
+                            <router-link to="/test-page" class="waves-effect" :class="{ active: isActive('/hero-landing') }">
+                                <i class="mdi mdi-cog-outline"></i>
+                                <span>Test Page</span>
+                            </router-link>
+                            <!-- Tooltip/Caption: Configure homepage content, hero sections, and landing page elements -->
+                        </li>
+
                         <!-- Homepage Management -->
                         <li :class="{ active: isActive('/hero-landing') }">
                             <router-link to="/hero-landing" class="waves-effect" :class="{ active: isActive('/hero-landing') }">

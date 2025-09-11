@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/pages/Home.vue";
 import MenuCategories from "@/pages/PosMenus/MenuCategories.vue";
+import TestPage from "@/components/testing.vue";  ;
+// 404  not found page  
 import NotFound404 from "@/pages/NotFound4042.vue";
 import MenuProducts from "@/pages/PosMenus/MenuProducts.vue";
 
@@ -12,6 +14,11 @@ import PatnerList from "@/pages/Patners/PatnerList.vue";
 import PatnerAdd from "@/pages/Patners/PatnerAdd.vue";
 
 const routes = [
+  {
+    path: '/test-page',
+    name: 'TestPage',
+    component: TestPage,
+  },
   {
     path: '/',
     name: 'Home',

@@ -58,7 +58,7 @@
             <cropper
             class="cropper"
             :src="imageUrl"
-            :stencil-props="{ aspectRatio: 500 / 500 }"
+            :stencil-props="{ aspectRatio: props.aspectRatio }"
             @change="onCropChange"
             ref="cropperRef"
             />
@@ -100,6 +100,11 @@ const props = defineProps({
   inputId: {
     type: String,
     required: true,
+  },
+
+  aspectRatio: {   // ✅ new prop
+    type: [Number, null],
+    default: null, // null = free crop
   },
 });
 
@@ -166,6 +171,8 @@ const cropImage = async () => {
       emit('image-selected', croppedImage.value);
 
       const thumbCanvas = document.createElement("canvas");
+      const cropCanvas = result.canvas;
+      
       const size = 100;
       thumbCanvas.width = size;
       thumbCanvas.height = size;

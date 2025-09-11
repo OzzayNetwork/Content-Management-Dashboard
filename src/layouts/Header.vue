@@ -18,7 +18,7 @@
                                     <img src="../assets/images/logo-light.svg" alt="" height="50">
                                 </span>
                             <span class="logo-lg">
-                                    <img src="../assets/images/color-log0.svg" alt="" height="42">
+                                    <img src="../assets/images/logo-white.svg" alt="" height="42">
                                 </span>
                         </a>
                     </div>
