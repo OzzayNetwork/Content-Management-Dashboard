@@ -1174,7 +1174,7 @@
             }
             .the-filters .dropdown-menu{
                 border-radius: 0px;
-                border-top: 3px solid #2fb895;
+                border-top: 3px solid #2164f3;
             }
             .the-filters button i{
                 border-right: 1px solid #e8e8e8; 
@@ -1183,7 +1183,7 @@
                 background-color: #8080802b;
             }
             .daterangepicker .ranges li.active{
-                 background:#2fb895 !important
+                 background:#2164f3 !important
             }
 
             /* the messenger */
@@ -1273,7 +1273,7 @@
                 padding: 0.5rem .5rem;
             }
             .mail-list a.active {
-                color: #2fb895;
+                color: #2164f3;
                 font-weight: 500;
             }
             .highcharts-credits{
@@ -1339,7 +1339,25 @@
     --bs-footer-color: #74788d;
     --bs-custom-white: #fff;
     --bs-hr-border-color: gray-400;
-    --bs-primary:#2fb895
+    --bs-primary:#2164f3;
+    /* --bs-body-font-family: "Nunito", sans-serif; */
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #2164f3;
+    --bs-btn-border-color: #2164f3;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #2164f3;
+    --bs-btn-hover-border-color: #2164f3;
+    --bs-btn-focus-shadow-rgb: 85, 110, 230;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #2164f3;
+    --bs-btn-active-border-color: #2164f3;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #2164f3;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #2164f3;
+    --bs-gradient: none;
 }
 
  /* Text Inputs, Textareas, and Selects - Clean Border Only */
@@ -1668,3 +1686,25 @@ hr{
     opacity: 50% !important;
 }
 
+.btn-light-brand {
+  
+    align-items: center;
+    justify-content: center;
+    color: #283c50;
+    border: 1px solid #dcdee4;
+}
+
+.btn-light-brand:hover {
+    /* color: black; */
+    background: #f8f9fa;
+    border: 1px solid #dcdee4;
+    /* font-weight: bold; */
+}
+.btn{
+    /* font-size: 12px; */
+}
+
+.verticle-align-middle{
+    vertical-align: middle !important;
+}
+        

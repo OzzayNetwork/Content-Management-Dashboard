@@ -318,7 +318,7 @@ import StoreProductsTable from "@/pages/PosMenus/storeProducts.tables.vue"; // A
 
 const isLoading = ref(true);
 const router = useRouter();
-const isEmpty = ref(false);
+const isEmpty = ref(true);
 
 onMounted(() => {
   // Simulate loading time or wait for data to load
