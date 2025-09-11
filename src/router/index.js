@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/pages/Home.vue";
 import MenuCategories from "@/pages/PosMenus/MenuCategories.vue";
-import NotFound404 from "@/pages/NotFound404.vue";
+import NotFound404 from "@/pages/NotFound4042.vue";
 import MenuProducts from "@/pages/PosMenus/MenuProducts.vue";
 
 //patners

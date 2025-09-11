@@ -137,7 +137,7 @@
                                 </div>
 
                                  <div class="col">
-                                    <button type="button" class="btn btn-link waves-effect" @click="addLink">  <i class="bx bx-plus font-size-16 align-middle "></i> Add Another Link</button>
+                                    <button type="button" class="btn btn-link waves-effect text-black" @click="addLink">  <i class="bx bx-plus font-size-16 align-middle "></i> Add Another Link</button>
                                 </div>
                             </div>
 
