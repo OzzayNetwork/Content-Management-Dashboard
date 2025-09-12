@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './App2.vue'
+import App from './App.vue'
 import router from './router' // ✅ Import router
 import jQuery from 'jquery'
 import { initTestScript } from './assets/js/test.js'

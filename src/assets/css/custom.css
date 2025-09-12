@@ -1707,4 +1707,11 @@ hr{
 .verticle-align-middle{
     vertical-align: middle !important;
 }
+.fs-12px{
+    font-size: 12px !important;
+}
+.search-box .form-control{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
         

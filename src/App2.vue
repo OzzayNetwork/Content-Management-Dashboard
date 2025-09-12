@@ -9,6 +9,7 @@ import SelectPickrTest from "./components/SelectPickrTest.vue";
 import SelectSearchBox from "./components/SelectSearchBox.vue";
 import imageUploader from "./components/ImageUploader.vue";
 import SingleToastVue from "./components/SingleToast.vue";
+import ImageToast from "./components/ImageToast.vue";
 
 // Reactive state
 const selectedItem = ref(null);
@@ -150,6 +151,12 @@ const languageOptions = [
 
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <ImageToast/>
               </div>
             </div>
             

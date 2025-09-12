@@ -367,14 +367,16 @@
        
         <div class="card-body p-0">
           <div class="table-responsive">
-            <table class="table verticle-align-middle">
+            <table class="table verticle-align-middle table-hover">
                 <thead class="text-uppercase table-info">
                   <tr>
                     <th class="px-4">Partner Details</th>
                     <th></th>
+                    <th>Description</th>
                     <th>Status</th>
+                    <th>Added By</th>
                     <th>Clicks</th>
-                    <th class="text-right pr-4">Action</th>
+                    <th class="text-right pr-4">Edited</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -391,13 +393,37 @@
                         </div>
                     </td>
                     <td>
+                      <p class="m-0" :title="'Homa Bay County is a county in the former Nyanza Province of Kenya. Its capital and largest town is Homa Bay. The county has a population of 1,131,950 (2019 census) and an area of 3,154.7 km2.'">
+                        {{ truncateText("Homa Bay County is a county in the former Nyanza Province of Kenya. Its capital and largest town is Homa Bay. The county has a population of 1,131,950 (2019 census) and an area of 3,154.7 km2.", 50) }}
+                      </p>
+                    </td>
+                    <td>
+                      <a href="javascript: void(0);" class="d-flex">
+                          <div class="flex-shrink-0 me-3">
+                              <div class="avatar-xs mx-auto">
+                                  <span class="avatar-title rounded-circle bg-pink font-size-16">
+                                          W
+                                      </span>
+                              </div>
+                          </div>
+                          <div class="flex-grow-1 chat-user-box">
+                              <p class="user-title m-0">Wyclif Gitonga</p>
+                              <p class="text-muted mb-0">On 25 Jan 2025 11:56 AM</p>
+                          </div>
+                      </a>
+                    </td>
+
+                    <td>
                       <p class="mb-0 fw-bold text-truncate"><i class="mdi mdi-circle text-success me-1 "></i> Active</p>
                     </td>
                     <td>
                       <span class="badge badge-soft-dark fw-bold"> <i class="mdi mdi-cursor-default-click font-size-16 text-black"></i> 33 Clicks</span>
                     </td>
-                    <td></td>
+                    <td class="text-right pr-4">
+                      3 Days Ago
+                    </td>
                   </tr>
+                 
                   
                   
                 </tbody>
@@ -405,6 +431,11 @@
           </div>
         </div>
       </div>
+
+      <!-- the details adside -->
+       <PatnerDetails />
+
+
     </div>
   </div>
 
@@ -420,8 +451,16 @@ import LoaderVue from "@/layouts/Loader.vue";
 import ImageUploader from '@/components/ImageUploader.vue';
 import SelectSearchBox from '@/components/SelectSearchBox.vue';
 import SingleToastVue from '@/components/SingleToast.vue';
+import PatnerDetails from './patner.Details.vue';
 
 const isEmpty = ref(false);
+
+// helper function to truncate text
+const truncateText = (text, limit = 100) => {
+  if (!text) return "";
+  return text.length > limit ? text.substring(0, limit) + "..." : text;
+};
+
 
 
 // Define component name and meta (this syntax is for Vue 3.3+)
