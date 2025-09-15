@@ -6,8 +6,8 @@ import MenuCategories from "@/pages/PosMenus/MenuCategories.vue";
 import TestPage from "@/components/testing.vue";
 
 // Error pages
-import NotFound404 from "@/pages/ErrorPages/NotFound404.vue";
-import Forbidden403 from "@/pages/ErrorPages/Forbidden403.vue";
+import NotFound404 from "@/pages/ErrorPages/NotFound4042.vue";
+import Forbidden403 from "@/pages/ErrorPages/Forbidden4032.vue";
 
 import MenuProducts from "@/pages/PosMenus/MenuProducts.vue";
 
