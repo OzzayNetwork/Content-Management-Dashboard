@@ -6,7 +6,7 @@
             <h1 class="error-title display-1 fw-bolder text-white position-relative mt-0 d-none">404</h1>
             <div class="pb-5">
                 <img
-                src="../assets/images/modern-bg/404.svg"
+                src="../../assets/images/modern-bg/404.svg"
                 alt="Logo" 
                 height="40px"
                 class="img-fluid  mt-4"
@@ -38,7 +38,7 @@
           <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
             <div>
               <img
-                src="../assets/images/logo-dark.png"
+                src="../../assets/images/logo-dark.png"
                 alt="Logo" 
                 height="40px"
                 class="img-fluid opacity-25 mt-4"
@@ -81,9 +81,9 @@ export default {
     background-color:#03a9f4;
     color: #333;
     text-align: center;
-    background-image: url('../assets/images/modern-bg/waves.png');
-     background-image: url('../assets/images/modern-bg/boat.png');
-      /* background-image: url('../assets/images/modern-bg/house.png'); */
+    background-image: url('../../assets/images/modern-bg/waves.png');
+     background-image: url('../../assets/images/modern-bg/boat.png');
+      /* background-image: url('../../assets/images/modern-bg/house.png'); */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;

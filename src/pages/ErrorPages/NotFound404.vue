@@ -9,7 +9,7 @@
           <div class="error-image-container">
             <div class="">
               <img
-                src="../assets/images/dribbble_1.gif"
+                src="../../assets/images/dribbble_1.gif"
                 alt="404 Error"
                 class="img-fluid"
               />
@@ -38,7 +38,7 @@
           <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
             <div>
               <img
-                src="../assets/images/logo-dark.png"
+                src="../../assets/images/logo-dark.png"
                 alt="Logo" 
                 height="40px"
                 class="img-fluid opacity-50 mt-4"
