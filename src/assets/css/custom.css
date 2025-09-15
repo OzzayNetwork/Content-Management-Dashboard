@@ -1725,4 +1725,7 @@ hr{
     border-style: dashed !important;
     border: 1px solid;
 }
+.header-action-btn .btn{
+    border-left: 1px solid #e8e8e8  ;
+}
         
