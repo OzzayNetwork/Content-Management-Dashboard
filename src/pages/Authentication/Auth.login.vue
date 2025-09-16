@@ -2,7 +2,7 @@
   <div>
     <div class="container-fluid p-0">
       <div class="row g-0">
-        <div class="col-xl-9 col-lg-9 col-md-8">
+        <div class="col-xl-8 col-lg-7 col-md-6 d-sm-none d-none d-md-block">
           <div class="auth-full-bg pt-lg-5 p-4">
             <div class="w-100">
               <div class="bg-overlay"></div>
@@ -58,7 +58,7 @@
         </div>
         <!-- end col -->
 
-        <div class="col-xl-3 col-md-4 col-lg-3">
+        <div class="col-xl-4 col-md-6 col-lg-5">
           <div class="auth-full-page-content p-md-5 p-5 bg-white">
             <div class="w-100">
               <div class="d-flex flex-column h-100">
