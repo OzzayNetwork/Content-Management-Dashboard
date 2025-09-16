@@ -4244,7 +4244,8 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before {
 .auth-full-page-content {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
+    display: flex;
+    height: 100vh;
 }
 
 @media (min-width:1200px) {

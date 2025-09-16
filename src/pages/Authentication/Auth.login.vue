@@ -66,11 +66,11 @@
 
                 <div class="my-auto">
                   <div>
-                    <h5 class="text-primary d-none ">Welcome Back!</h5>
-                    <h2 class="fs-20 fw-bolder mb-4">Login</h2>
+                    <h5 class="text-primary d-none">Login to your CS Payments Dashboard</h5>
+                    <h3 class="fs-20 fw-bolder mb-4 "><h3 class="fs-20 fw-bolder mb-4">Dashboard Login</h3></h3>
                     <p class="fw-bold mb-1">Login to your Account</p>
                     <p class="text-muted fs-12 mb-2">
-                     Thank you for get back Nelel web applications, let's access our the best recommendation for you.
+                        Access your customer relationship tools securely. Enter your credentials to manage clients, track interactions, and monitor performance.
                     </p>
                   </div>
 
