@@ -482,9 +482,9 @@ const fetchPartners = async () => {
      const response = await axios.get("https://ozzaynetwork.github.io/Mock-Api/Partners.json");
     // assuming API returns an array of partners
 
-    console.log("API response:", response.data);
+    //console.log("API response:", response.data);
     // If it's an array inside another array, take the first element
-    partners.value = Array.isArray(response.data[0])
+    partners.value = Array.isArray(response.data)
   ? response.data[0]
   : response.data;
 
@@ -504,7 +504,7 @@ const fetchPartners = async () => {
 onMounted(() => {
   document.title = 'List Of Partners - CSPL CRM';
   fetchPartners();
-  console.log("Partners data:", partners.value);
+  console.log("Partners data count:", partners.value.length);
   console.log("Is Empty:", isEmpty.value);
 });
 </script>

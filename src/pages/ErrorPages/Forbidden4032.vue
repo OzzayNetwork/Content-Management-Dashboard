@@ -78,7 +78,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .error-page-new-2{
     background-color:#03a9f4;
     color: #333;

@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+// Authentication pages
+import Login from "@/pages/Authentication/Auth.Login.vue";
+
 // Import views
 import Home from "@/pages/Home.vue";
 import MenuCategories from "@/pages/PosMenus/MenuCategories.vue";
@@ -15,7 +18,18 @@ import MenuProducts from "@/pages/PosMenus/MenuProducts.vue";
 import PatnerList from "@/pages/Patners/PatnerList.vue";
 import PatnerAdd from "@/pages/Patners/PatnerAdd.vue";
 
+//test pages
+import PartnerTestList from "@/pages/Patners/Partner.List.Test.vue";
+
+// Define routes
+
 const routes = [
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+    meta: { layout: "none" }
+  },
   {
     path: "/test-page",
     name: "TestPage",
@@ -30,6 +44,11 @@ const routes = [
     path: "/partners/list",
     name: "PatnerList",
     component: PatnerList,
+  },
+  {
+    path: "/partners/testList",
+    name: "PatnerListTest",
+    component: PartnerTestList,
   },
   {
     path: "/partners/add",
