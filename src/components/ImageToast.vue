@@ -1,31 +1,23 @@
 <template>
   <div>
-    <h1>Image toast starts here</h1>
-
-    <button 
-      type="button" 
-      class="btn btn-primary" 
-      @click="startToastFlow"
-    >
-      Show live toast
-    </button>
-
     <!-- ================= LOADING TOAST ================= -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      <div 
-        class="toast bg-white animate__animated animate__fadeInUp animate__faster" 
-        :class="{ show: showLoadingToast }"
-        role="alert" aria-live="assertive" aria-atomic="true"
+      <div
+        v-if="status === 'loading'"
+        class="toast bg-white animate__animated animate__fadeInUp animate__faster show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
       >
         <div class="toast-body p-3 d-flex align-items-center">
           <div class="me-3">
             <div class="spinner-border text-dark m-1" role="status">
-              <span class="sr-only">Loading...</span>
+              <span class="visually-hidden">Loading...</span>
             </div>
           </div>
           <div>
-            <h6 class="fw-bold text-black fs-5">Processing ...</h6>
-            <p class="mb-0 fs-12px">Please wait a moment, the Partner is being added</p>
+            <h6 class="fw-bold text-black fs-5">{{ title || 'Processing...' }}</h6>
+            <p class="mb-0 fs-12px">{{ message || 'Please wait a moment...' }}</p>
           </div>
         </div>
       </div>
@@ -33,25 +25,31 @@
 
     <!-- ================= RESULTS TOAST ================= -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      <div 
-        class="toast bg-white animate__animated animate__bounceInUp animate__fast" 
-        :class="{ show: showResultsToast }"
-        role="alert" aria-live="assertive" aria-atomic="true"
+      <div
+        v-if="status === 'success' || status === 'error'"
+        class="toast bg-white animate__animated animate__bounceInUp animate__fast show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
         style="width: 500px;"
         @mouseenter="pauseAutoHide"
         @mouseleave="resumeAutoHide"
       >
         <div class="toast-body p-3 d-flex align-items-center">
-          <div class="me-3">
-            <img class="rounded me-2" alt="Partner Logo" width="140" src="../assets/images/clients/1.png">
+          <div class="me-3" v-if="image">
+            <img class="rounded me-2" alt="toast image" :height="imageHeight"  :src="image">
           </div>
-          <div>
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <h6 class="fw-bold text-black fs-5 m-0">New Partner Added Successfully</h6>
-              <button type="button" class="btn-close" @click="hideResultsToast"></button>
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center justify-content-between mb-3 w-100">
+              <h6
+                class="fw-bold fs-5 m-0"
+                :class="status === 'error' ? 'text-danger' : 'text-black'"
+              >
+                {{ title }}
+              </h6>
+              <button type="button" class="btn-close" @click="hideToast"></button>
             </div>
-            <p class="fs-12px">New Partner, Homa Bay County Government has been added to the List of Partners</p>
-            <button class="btn btn-dark">View on <span class="text-warning">Website</span></button>
+            <p class="fs-12px">{{ message }}</p>
           </div>
         </div>
       </div>
@@ -59,98 +57,50 @@
   </div>
 </template>
 
-
 <script setup>
-import { ref, onBeforeUnmount } from 'vue'
+import { watch, onBeforeUnmount } from "vue";
 
-/**
- * Reactive state for controlling toast visibility
- */
-const showLoadingToast = ref(false)   // Controls "Loading..." toast
-const showResultsToast = ref(false)   // Controls "Results" toast
+const props = defineProps({
+  status: { type: String, default: null },
+  title: { type: String, default: "" },
+  message: { type: String, default: "" },
+  image: { type: String, default: null },
+  autoHide: { type: Boolean, default: true },
+  autoHideDelay: { type: Number, default: 5000 },
+  imageHeight: { type: [String, Number], default: 140 }, // 👈 new prop
+});
 
-/**
- * Timeout references
- */
-let toastTimer = null        // For switching from loading → results
-let autoHideTimer = null     // For auto-hiding results toast
-const AUTO_HIDE_DELAY = 5000 // 5 seconds
+const emit = defineEmits(["hide"]);
 
-/**
- * Starts the toast flow:
- * 1. Show "Loading" toast
- * 2. After 3s, hide it
- * 3. Show "Results" toast
- * 4. Auto-hide results after 5s
- */
-const startToastFlow = () => {
-  // Reset states
-  showLoadingToast.value = true
-  showResultsToast.value = false
+let autoHideTimer = null;
 
-  // Clear any existing timers
-  clearTimers()
-
-  // Switch loading → results
-  toastTimer = setTimeout(() => {
-    showLoadingToast.value = false
-    showResultsToast.value = true
-
-    startAutoHideTimer()
-  }, 3000)
-}
-
-/**
- * Starts the auto-hide timer for results toast
- */
-const startAutoHideTimer = () => {
-  autoHideTimer = setTimeout(() => {
-    showResultsToast.value = false
-  }, AUTO_HIDE_DELAY)
-}
-
-/**
- * Pauses the auto-hide timer when hovering
- */
-const pauseAutoHide = () => {
-  if (autoHideTimer) {
-    clearTimeout(autoHideTimer)
-    autoHideTimer = null
+watch(
+  () => props.status,
+  (newStatus) => {
+    clearTimer();
+    if ((newStatus === "success" || newStatus === "error") && props.autoHide) {
+      autoHideTimer = setTimeout(() => emit("hide"), props.autoHideDelay);
+    }
   }
-}
+);
 
-/**
- * Resumes auto-hide when mouse leaves
- */
+const pauseAutoHide = () => clearTimer();
+
 const resumeAutoHide = () => {
-  if (showResultsToast.value) {
-    startAutoHideTimer()
+  if (!autoHideTimer && (props.status === "success" || props.status === "error")) {
+    autoHideTimer = setTimeout(() => emit("hide"), props.autoHideDelay);
   }
-}
+};
 
-/**
- * Manually hides results toast
- */
-const hideResultsToast = () => {
-  showResultsToast.value = false
-  pauseAutoHide()
-}
+const hideToast = () => {
+  clearTimer();
+  emit("hide");
+};
 
-/**
- * Clears all timers
- */
-const clearTimers = () => {
-  if (toastTimer) clearTimeout(toastTimer)
-  if (autoHideTimer) clearTimeout(autoHideTimer)
-  toastTimer = null
-  autoHideTimer = null
-}
+const clearTimer = () => {
+  if (autoHideTimer) clearTimeout(autoHideTimer);
+  autoHideTimer = null;
+};
 
-/**
- * Cleanup on unmount
- */
-onBeforeUnmount(() => {
-  clearTimers()
-})
+onBeforeUnmount(clearTimer);
 </script>
-

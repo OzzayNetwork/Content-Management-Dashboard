@@ -24,6 +24,7 @@
     "metismenu": "^3.0.7",
     "metismenujs": "^1.4.0",
     "node-waves": "^0.7.6",
+    "pinia": "^3.0.3",
     "simplebar": "^6.3.1",
     "textarea-caret": "^3.1.0",
     "vue": "^3.5.13",

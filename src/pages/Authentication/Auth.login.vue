@@ -8,7 +8,7 @@
               <div class="bg-overlay"></div>
               <div class="d-flex h-100 flex-column">
                 <div class="p-4 mt-auto">
-                  <div class="row justify-content-center">
+                  <div class="row justify-content-center d-none">
                     <div class="col-lg-7">
                       <div class="text-center">
                         <h4 class="mb-3">
@@ -61,13 +61,13 @@
         <div class="col-xl-4 col-md-6 col-lg-5">
           <div class="auth-full-page-content p-md-5 p-5 bg-white">
             <div class="w-100">
-              <div class="d-flex flex-column h-100">
+              <div class="d-flex flex-column h-100 p-3">
                 <AuthHeader />
 
                 <div class="my-auto">
                   <div>
-                    <h5 class="text-primary d-none">Login to your CS Payments Dashboard</h5>
-                    <h3 class="fs-20 fw-bolder mb-4 "><h3 class="fs-20 fw-bolder mb-4">Dashboard Login</h3></h3>
+                    <h5 class=" text-uppercase fs-12 ">Customer Relationship Management Dashboard</h5>
+                    <h3 class="fs-20 fw-bolder mb-4 mt-0 pt-0">Dashboard Login</h3>
                     <p class="fw-bold mb-1">Login to your Account</p>
                     <p class="text-muted fs-12 mb-2">
                         Access your customer relationship tools securely. Enter your credentials to manage clients, track interactions, and monitor performance.
@@ -77,13 +77,13 @@
                   <div class="mt-4">
                     <form @submit.prevent="handleLogin">
                       <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label">Email</label>
                         <input 
-                          type="text" 
+                          type="email" 
                           class="form-control " 
                           id="username" 
                           v-model="username"
-                          placeholder="Enter username"
+                          placeholder="Enter email"
                           required
                         >
                       </div>
@@ -132,10 +132,11 @@
 
                       <div class="mt-3 d-grid">
                         <button 
-                          class="btn btn-primary waves-effect waves-light" 
+                          class="btn btn-primary waves-effect waves-light d-flex align-items-center justify-content-center" 
                           type="submit"
                           :disabled="loading"
-                        >
+                        >   
+                           <span v-if="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                           {{ loading ? 'Logging in...' : 'Log In' }}
                         </button>
                       </div>
@@ -143,6 +144,15 @@
                   </div>
                 </div>
                 <AuthFooter />
+                <ImageToast
+                    :status="toastStatus"
+                    :title="toastTitle"
+                    :message="toastMessage"
+                    :image="toastImage"
+                    :imageHeight="70"
+                    @hide="toastStatus = null"
+                />
+
 
                 
               </div>
@@ -156,54 +166,126 @@
     <!-- end container-fluid -->
   </div>
 </template>
-
 <script setup>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import AuthFooter from './Auth.Footer.vue'
-import AuthHeader from './Auth.Header.vue'
+/**
+ * ================================
+ * IMPORTS
+ * ================================
+ */
+import { ref, computed } from "vue"; // Vue reactivity + computed values
+import { useRouter } from "vue-router"; // For navigation after login
+import AuthFooter from "./Auth.Footer.vue"; // Login footer UI
+import AuthHeader from "./Auth.Header.vue"; // Login header UI
 
-const router = useRouter()
+import authApi from "@/api/auth";   // API module for authentication requests
+import { setAuthToken } from "@/api/index"; // Helper to attach token to requests
+import ImageToast from "@/components/ImageToast.vue"; // Toast component for feedback
 
-// Reactive data
-const username = ref('')
-const password = ref('')
-const rememberMe = ref(false)
-const showPassword = ref(false)
-const loading = ref(false)
+//Importing the results images
+import successImage from "../../assets/images/icons/check.png";
+import errorImage from "../../assets/images/icons/error.png";
 
-// Computed property for current year
-const currentYear = computed(() => new Date().getFullYear())
+/**
+ * ================================
+ * REACTIVE STATE
+ * ================================
+ */
+const router = useRouter(); // Vue Router instance for navigation
 
-// Methods
+// User credentials + login form state
+const username = ref("");      // Username input value (actually email)
+const password = ref("");      // Password input value
+const rememberMe = ref(false); // "Remember me" checkbox
+const showPassword = ref(false); // Toggles password visibility
+const loading = ref(false);    // Loading state during API call
+
+// Toast state (drives ImageToast component)
+const toastStatus = ref(null); // "loading" | "success" | "error"
+const toastTitle = ref("");    // Toast heading text
+const toastMessage = ref("");  // Toast body text
+const toastImage = ref(null);  // Optional toast image (success/error icons)
+
+// Dynamic current year (for footer or branding)
+const currentYear = computed(() => new Date().getFullYear());
+
+/**
+ * ================================
+ * METHODS
+ * ================================
+ */
+
+// Toggle between password text/plain or hidden
 const togglePasswordVisibility = () => {
-  showPassword.value = !showPassword.value
-}
+  showPassword.value = !showPassword.value;
+};
 
+// Handle login process
 const handleLogin = async () => {
+  // Validation: ensure both fields are filled
   if (!username.value || !password.value) {
-    alert('Please fill in all fields')
-    return
+    toastStatus.value = "error";
+    toastTitle.value = "Missing Fields";
+    toastMessage.value = "Please enter both username and password.";
+    toastImage.value = errorImage;
+    return;
   }
 
-  loading.value = true
-  
+  // Begin loading state + show loading toast
+  loading.value = true;
+  toastStatus.value = "loading";
+  toastTitle.value = "Logging In";
+  toastMessage.value = "Please wait while we authenticate...";
+  toastImage.value = null;
+
   try {
-    // Add your login logic here
-    // Example: await authStore.login(username.value, password.value, rememberMe.value)
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    // Redirect to dashboard or home page
-    router.push('/')
+    // Call login API with entered credentials
+    const response = await authApi.login({
+      email: username.value,    // 👈 API expects "email"
+      password: password.value
+    });
+
+    // Extract token (depends on API response structure)
+    const token = response.data?.data?.token || response.data?.token;
+    if (!token) throw new Error("No token received from API");
+
+    console.log(response.data);
+
+    // Save token for future authenticated requests
+    setAuthToken(token);
+    if (rememberMe.value) {
+      localStorage.setItem("authToken", token); // Persist across sessions
+    } else {
+      sessionStorage.setItem("authToken", token); // Clear on browser close
+    }
+
+    // Success toast
+    toastStatus.value = "success";
+    toastTitle.value = "Login Successful 🎉";
+    toastMessage.value = "Welcome back to the dashboard.";
+    toastImage.value = successImage;
+
+    // Redirect to dashboard after short delay
+    setTimeout(() => {
+      router.push("/");
+    //    window.location.href = "/";
+    }, 1500);
+
   } catch (error) {
-    console.error('Login failed:', error)
-    alert('Login failed. Please check your credentials.')
+    // Log exact backend error for debugging
+    console.error("Login failed:", error.response?.data || error.message);
+
+    setTimeout(() => {
+      toastStatus.value = "error";
+      toastTitle.value = "Login Failed";
+      toastMessage.value = "The email address or password you entered is incorrect. Please check your credentials and try again.";
+      toastImage.value = errorImage;
+    }, 100);
+
   } finally {
-    loading.value = false
+    // Always stop loading spinner
+    loading.value = false;
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
