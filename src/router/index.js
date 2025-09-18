@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // Authentication pages
 import Login from "@/pages/Authentication/Auth.Login.vue";
 import ResetPassword from "@/pages/Authentication/Auth.resetPassword.vue";
+import AuthVerifyOtp from "../pages/Authentication/Auth.verify.otp.vue";
 
 // Import views
 import Home from "@/pages/Home.vue";
@@ -38,6 +39,12 @@ const routes = [
     name: "ReserPassword",
     component: ResetPassword,
     meta: { layout: "none",title: "Account Password Reset" }
+  },
+  {
+    path: "/Verify-otp",
+    name: "OtpVerification",
+    component: AuthVerifyOtp,
+    meta: { layout: "none",title: "OTP Verrification" }
   },
   {
     path: "/test-page",
