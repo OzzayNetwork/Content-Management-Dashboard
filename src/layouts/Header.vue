@@ -277,7 +277,7 @@
                                 </div>
 
                                 <!-- User email -->
-                                <p class="fs-12 mb-0 text-muted" v-if="user">{{ user.email }}</p>
+                                <p class="fs-12 mb-0 text-muted text-lowercase" v-if="user">{{ user.email }}</p>
                                 <p class="fs-12 mb-0 text-muted placeholder-glow overflow-hidden" style="height: 15px;" v-else>
                                     <span class="placeholder col-12"></span>
                                 </p>

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 // Authentication pages
 import Login from "@/pages/Authentication/Auth.Login.vue";
+import ResetPassword from "@/pages/Authentication/Auth.resetPassword.vue";
 
 // Import views
 import Home from "@/pages/Home.vue";
@@ -30,7 +31,13 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
-    meta: { layout: "none" }
+    meta: { layout: "none",title: "Account Login "  }
+  },
+  {
+    path: "/Reset-Password",
+    name: "ReserPassword",
+    component: ResetPassword,
+    meta: { layout: "none",title: "Account Password Reset" }
   },
   {
     path: "/test-page",
@@ -41,33 +48,37 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    meta: { requiresAuth: true, title: "Main Dashboard "  }, // Password protected
   },
   {
     path: "/partners/list",
     name: "PatnerList",
     component: PatnerList,
+     meta: { requiresAuth: true, title: "List of Partners"  }, // Password protected
   },
   {
     path: "/partners/testList",
     name: "PatnerListTest",
     component: PartnerTestList,
+     meta: { requiresAuth: true, title: "Testing List of Partners" }, // Password protected
   },
   {
     path: "/partners/add",
     name: "PatnerAdd",
     component: PatnerAdd,
+     meta: { requiresAuth: true, title: "Add A Partner"  }, // Password protected
   },
   {
     path: "/MenuCategories",
     name: "MenuCategories",
     component: MenuCategories,
-    meta: { requiresAuth: true }, // 🔒 protected
+    meta: { protected: true, title: "Menu Categories" }, // 🔒 protected
   },
   {
     path: "/MenuProducts",
     name: "MenuProducts",
     component: MenuProducts,
-    meta: { requiresAuth: true }, // 🔒 protected
+    meta: { protected: true, title: "Menu Products" }, // 🔒 protected
   },
 
   // 403 Forbidden
@@ -75,6 +86,7 @@ const routes = [
     path: "/403",
     name: "Forbidden",
     component: Forbidden403,
+     meta: {title: "Error 403 Protected Page"}
   },
 
   // 404 Not Found (catch-all must be last)
@@ -82,6 +94,7 @@ const routes = [
     path: "/:catchAll(.*)",
     name: "NotFound",
     component: NotFound404,
+    meta: {title: "Error 404 Page not Found"}
   },
 ];
 
@@ -95,7 +108,7 @@ router.beforeEach((to, from, next) => {
   // Example authentication state (replace with real auth logic)
   const isAuthenticated = false; // 🔒 e.g., check localStorage or Vuex
 
-  if (to.meta.requiresAuth && !isAuthenticated) {
+  if (to.meta.protected && !isAuthenticated) {
     next({ name: "Forbidden" });
   } else {
     next();

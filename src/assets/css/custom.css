@@ -1749,5 +1749,10 @@ hr{
 .my-custom-loader {
   z-index: 1000; /* must be less than 99999 */
 }
+.btn-group-lg>.btn, .btn-lg {
+    padding: 11px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+}
 
         

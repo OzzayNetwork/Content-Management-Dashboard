@@ -76,7 +76,7 @@
 
                   <div class="mt-4">
                     <form @submit.prevent="handleLogin">
-                      <div class="mb-3">
+                      <div class="mb-4">
                         <label for="username" class="form-label">Email</label>
                         <input 
                           type="email" 
@@ -88,9 +88,9 @@
                         >
                       </div>
 
-                      <div class="mb-3">
-                        <div class="float-end">
-                          <router-link to="/auth-recoverpw" class="text-muted">
+                      <div class="mb-4">
+                        <div class="float-end d-none">
+                          <router-link to="/Reset-Password" class="text-muted">
                             Forgot password?
                           </router-link>
                         </div>
@@ -118,7 +118,7 @@
                         </div>
                       </div>
 
-                      <div class="form-check">
+                      <div class="form-check d-none">
                         <input 
                           class="form-check-input" 
                           type="checkbox" 
@@ -132,7 +132,7 @@
 
                       <div class="mt-3 d-grid">
                         <button 
-                          class="btn btn-primary waves-effect waves-light d-flex align-items-center justify-content-center" 
+                          class="btn btn-primary waves-effect waves-light d-flex align-items-center justify-content-center btn-lg text-uppercase" 
                           type="submit"
                           :disabled="loading"
                         >   
@@ -141,6 +141,12 @@
                         </button>
                       </div>
                     </form>
+                    <div class="mt-5 text-muted">
+                      <span> Forgot your password? </span>
+                      <router-link to="/reset-password" class="fw-bold d-inline-flex align-items-center">
+                        <i class="bx bx-key me-1"></i> Reset Password
+                      </router-link>
+                    </div>                    
                   </div>
                 </div>
                 <AuthFooter />
