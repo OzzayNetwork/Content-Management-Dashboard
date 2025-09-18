@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "@/pages/Authentication/Auth.Login.vue";
 import ResetPassword from "@/pages/Authentication/Auth.resetPassword.vue";
 import AuthVerifyOtp from "../pages/Authentication/Auth.verify.otp.vue";
-
+import AuthChangePassword from "../pages/Authentication/Auth.changePassword.vue";
 
 // Import views
 import Home from "@/pages/Home.vue";
@@ -40,6 +40,12 @@ const routes = [
     name: "ReserPassword",
     component: ResetPassword,
     meta: { layout: "none",title: "Account Password Reset" }
+  },
+  {
+    path: "/Change-Password",
+    name: "ChangePassword",
+    component: AuthChangePassword,
+    meta: { layout: "none",title: "Change your Account's Password" }
   },
   {
     path: "/Verify-otp",

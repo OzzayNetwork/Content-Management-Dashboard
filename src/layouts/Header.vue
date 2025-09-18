@@ -328,13 +328,12 @@
                         <a class="dropdown-item" href="auth-lock-screen.html">
                             <i class="bx bx-lock font-size-16 align-middle me-2"></i>
                             <span key="t-lock-screen">Lock Screen</span>
-                        </a>
-
+                        </a>                    
                         <!-- Change Password -->
-                        <a class="dropdown-item" href="auth-change-password.html">
+                        <router-link class="dropdown-item" to="/Change-Password">
                             <i class="bx bx-key font-size-16 align-middle me-2"></i>
                             <span key="t-change-password">Change Password</span>
-                        </a>
+                        </router-link>
 
                         <div class="dropdown-divider"></div>
 

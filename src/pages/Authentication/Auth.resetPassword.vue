@@ -154,3 +154,18 @@ const handlePasswordReset = async () => {
   }
 };
 </script>
+<style scoped>
+  .auth-full-bg .bg-overlay{
+background-color: #2164f3;
+    background: url(../../assets/images/modern-bg/bg-email.png);
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    /* background-size: contain; */
+    background-position: center;
+     opacity: .8;
+
+  }
+  .auth-full-bg{
+    background-color: #2164f3;
+  }
+</style>

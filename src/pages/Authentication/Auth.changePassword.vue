@@ -2,7 +2,7 @@
   <div>
     <div class="container-fluid p-0">
       <div class="row g-0">
-        <!-- Left banner remains the same -->
+        <!-- Left banner -->
         <div class="col-xl-8 col-lg-7 col-md-6 d-sm-none d-none d-md-block">
           <div class="auth-full-bg pt-lg-5 p-4">
             <div class="w-100">
@@ -14,7 +14,7 @@
           </div>
         </div>
 
-        <!-- Password reset form -->
+        <!-- Change password form -->
         <div class="col-xl-4 col-md-6 col-lg-5">
           <div class="auth-full-page-content p-md-5 p-5 bg-white">
             <div class="w-100">
@@ -24,15 +24,16 @@
                 <div class="my-auto">
                   <div>
                     <h5 class="text-uppercase fs-12">Customer Relationship Management Dashboard</h5>
-                    <h3 class="fs-20 fw-bolder mb-4 mt-0 pt-0">Reset Your Password</h3>
-                    <p class="fw-bold mb-1">Forgot your password?</p>
+                    <h3 class="fs-20 fw-bolder mb-4 mt-0 pt-0">Change Password</h3>
+                    <p class="fw-bold mb-1">Secure your account</p>
                     <p class="text-muted fs-12 mb-2">
-                      Enter your registered email address below. We'll send you a one-time password (OTP) to verify your identity.
+                      Enter your email and new password. We'll verify with OTP before applying changes.
                     </p>
                   </div>
 
                   <div class="mt-4">
-                    <form @submit.prevent="handlePasswordReset">
+                    <form @submit.prevent="handlePasswordChange">
+                      <!-- Email -->
                       <div class="mb-3">
                         <label for="email" class="form-label">Email Address</label>
                         <input 
@@ -41,6 +42,33 @@
                           id="email" 
                           v-model="email"
                           placeholder="Enter your email"
+                          required
+                          autofocus
+                        >
+                      </div>
+
+                      <!-- New Password -->
+                      <div class="mb-3">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input 
+                          type="password" 
+                          class="form-control" 
+                          id="newPassword" 
+                          v-model="newPassword"
+                          placeholder="Enter new password"
+                          required
+                        >
+                      </div>
+
+                      <!-- Confirm Password -->
+                      <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input 
+                          type="password" 
+                          class="form-control" 
+                          id="confirmPassword" 
+                          v-model="confirmPassword"
+                          placeholder="Re-enter new password"
                           required
                         >
                       </div>
@@ -52,15 +80,15 @@
                           :disabled="loading"
                         >
                           <span v-if="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                          {{ loading ? 'Sending OTP...' : 'Send OTP' }}
+                          {{ loading ? 'Processing...' : 'Next' }}
                         </button>
                       </div>
                     </form>
 
-                    <div class="mt-5 text-muted">
-                    <span> Remembered your password? </span>
-                    <router-link to="/login" class="fw-bold">Back to Login</router-link>
-                    </div>
+                    <div class="mt-5 text-muted text-center">
+  <span> Changed your mind? </span>
+  <a href="javascript:void(0)" class="fw-bold" @click="goBack">Go Back</a>
+</div>
 
                   </div>
                 </div>
@@ -84,6 +112,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
@@ -93,9 +122,6 @@ import AuthFooter from "./Auth.Footer.vue";
 import AuthHeader from "./Auth.Header.vue";
 import ImageToast from "@/components/ImageToast.vue";
 
-import authApi from "@/api/auth";   // Should expose password reset request endpoint
-
-// Importing toast images
 import successImage from "../../assets/images/icons/check.png";
 import errorImage from "../../assets/images/icons/error.png";
 
@@ -103,6 +129,8 @@ const router = useRouter();
 
 // Form state
 const email = ref("");
+const newPassword = ref("");
+const confirmPassword = ref("");
 const loading = ref(false);
 
 // Toast state
@@ -111,42 +139,45 @@ const toastTitle = ref("");
 const toastMessage = ref("");
 const toastImage = ref(null);
 
-// Method: Request OTP for password reset
-const handlePasswordReset = async () => {
-  if (!email.value) {
+const goBack = () => {
+  router.back(); // 👈 returns to the previous page
+};
+
+
+// Handle change password request
+const handlePasswordChange = async () => {
+  if (!email.value || !newPassword.value || !confirmPassword.value) {
     toastStatus.value = "error";
-    toastTitle.value = "Missing Email";
-    toastMessage.value = "Please enter your registered email address.";
+    toastTitle.value = "Missing Fields";
+    toastMessage.value = "Please fill in all fields.";
+    toastImage.value = errorImage;
+    return;
+  }
+
+  if (newPassword.value !== confirmPassword.value) {
+    toastStatus.value = "error";
+    toastTitle.value = "Passwords Don't Match";
+    toastMessage.value = "New password and confirmation must match.";
     toastImage.value = errorImage;
     return;
   }
 
   NProgress.start();
   loading.value = true;
-  toastStatus.value = "loading";
-  toastTitle.value = "Processing...";
-  toastMessage.value = "Requesting password reset OTP...";
-  toastImage.value = null;
 
   try {
-    const response = await authApi.requestPasswordReset({ email: email.value });
-
-    // ✅ Assume backend responds with success
-    toastStatus.value = "success";
-    toastTitle.value = "OTP Sent";
-    toastMessage.value = `An OTP has been sent to ${email.value}. Please check your inbox.`;
-    toastImage.value = successImage;
-
-    // Redirect to OTP verification page after a short delay
-    setTimeout(() => {
-      router.push({ path: "/verify-otp", query: { email: email.value } });
-    }, 1500);
-
+    // ✅ Move to OTP verification with email + password
+    router.push({ 
+      path: "/verify-otp", 
+      query: { 
+        email: email.value, 
+        password: newPassword.value 
+      } 
+    });
   } catch (error) {
-    console.error("Password reset error:", error.response?.data || error.message);
     toastStatus.value = "error";
-    toastTitle.value = "Request Failed";
-    toastMessage.value = "We couldn't send the OTP. Please check your email and try again.";
+    toastTitle.value = "Error";
+    toastMessage.value = "Could not proceed. Try again.";
     toastImage.value = errorImage;
   } finally {
     NProgress.done();
@@ -154,3 +185,20 @@ const handlePasswordReset = async () => {
   }
 };
 </script>
+
+<style scoped>
+  .auth-full-bg .bg-overlay{
+background-color: #2164f3;
+    background: url(../../assets/images/modern-bg/key.png);
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    /* background-size: contain; */
+    background-position: center;
+     opacity: .8;
+
+  }
+  .auth-full-bg{
+    background-color: #2164f3;
+  }
+</style>
+
