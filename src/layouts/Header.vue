@@ -297,9 +297,11 @@
 
                         </div>
                     </div>
-                    <div v-else>
+                    <div class="d-flex align-items-center justify-content-center px-3" v-else>
                         <!-- Show login button / redirect -->
-                        <router-link to="/login">Login</router-link>
+                        <router-link class="btn btn-primary waves-effect waves-light" to="/login">
+                            <i class="bx bx-log-in font-size-16 me-1"></i> Account Login
+                        </router-link>
                     </div>
                     
                     
