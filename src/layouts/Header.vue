@@ -73,7 +73,7 @@
                 <div class="dropdown  ms-1 d-none">
                     <a href="pricing.html" type="button"
                         class="btn header-item noti-icon waves-effect d-flex align-items-center justify-content-center">
-                        <i class="bx bx-dollar"></i> <span class="d-none d-md-inline">Pricing</span>
+                        <i class="bx bx-dollar"></i> <span class="d-none d-md-inline">Ai Sui</span>
                     </a>
                 </div>
 
@@ -85,7 +85,7 @@
                     </button>
                 </div>
 
-                <div class="dropdown d-inline-block d-none">
+                <div class="dropdown d-inline-block">
 
                     <!-- notifications, i will come to this later -->
                     <button type="button" class="btn header-item noti-icon waves-effect"

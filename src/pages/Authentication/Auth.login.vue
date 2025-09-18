@@ -85,6 +85,7 @@
                           v-model="username"
                           placeholder="Enter email"
                           required
+                          autofocus
                         >
                       </div>
 
