@@ -445,6 +445,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import axios from "axios";
 import { useRouter } from 'vue-router';
 import LoaderVue from "@/layouts/Loader.vue";
 import ImageUploader from '@/components/ImageUploader.vue';
@@ -455,7 +456,7 @@ import PatnerDetails from './patner.Details.vue';
 // importing partners data from partners API
 import partnersApi from '@/api/partners';
 
-const isEmpty = ref(false);
+const isEmpty = ref(true);
 const isLoading = ref(true);
 const errorMessage = ref(null);
 const partners = ref([]);
@@ -477,23 +478,33 @@ defineOptions({
 // Fetch partners
 const fetchPartners = async () => {
   try {
-    const response = await Partners.getAll();
-    console.log("API response:", response.data);
+    // const response = await partnersApi.getAll();
+     const response = await axios.get("https://ozzaynetwork.github.io/Mock-Api/Partners.json");
+    // assuming API returns an array of partners
 
-    partners.value = response.data || [];
-    isEmpty.value = partners.value.length === 0;
+    //console.log("API response:", response.data);
+    // If it's an array inside another array, take the first element
+    partners.value = Array.isArray(response.data)
+  ? response.data[0]
+  : response.data;
+
+  isEmpty.value = partners.value.length === 0;
+
+  console.log("Partners data:", partners.value);
+
   } catch (err) {
     console.error("Error fetching partners:", err);
     errorMessage.value = "Failed to load partners.";
   } finally {
     isLoading.value = false;
+    
   }
 };
 
 onMounted(() => {
   document.title = 'List Of Partners - CSPL CRM';
   fetchPartners();
-  console.log("Partners data:", partners.value);
+  console.log("Partners data count:", partners.value.length);
   console.log("Is Empty:", isEmpty.value);
 });
 </script>

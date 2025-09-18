@@ -177,7 +177,10 @@ import { useRouter } from "vue-router"; // For navigation after login
 import AuthFooter from "./Auth.Footer.vue"; // Login footer UI
 import AuthHeader from "./Auth.Header.vue"; // Login header UI
 
+import NProgress from "nprogress";//the proggress bar at the top
+
 import authApi from "@/api/auth";   // API module for authentication requests
+import { useAuthStore } from "@/stores/auth"; // <-- import the Pinia auth store
 import { setAuthToken } from "@/api/index"; // Helper to attach token to requests
 import ImageToast from "@/components/ImageToast.vue"; // Toast component for feedback
 
@@ -191,6 +194,7 @@ import errorImage from "../../assets/images/icons/error.png";
  * ================================
  */
 const router = useRouter(); // Vue Router instance for navigation
+const authStore = useAuthStore(); // <-- Pinia store instance
 
 // User credentials + login form state
 const username = ref("");      // Username input value (actually email)
@@ -221,6 +225,9 @@ const togglePasswordVisibility = () => {
 
 // Handle login process
 const handleLogin = async () => {
+
+   // Start the loader when login begins
+  NProgress.start();
   // Validation: ensure both fields are filled
   if (!username.value || !password.value) {
     toastStatus.value = "error";
@@ -246,7 +253,11 @@ const handleLogin = async () => {
 
     // Extract token (depends on API response structure)
     const token = response.data?.data?.token || response.data?.token;
+    const user = response.data?.data?.user || response.data?.user;
     if (!token) throw new Error("No token received from API");
+
+    // 👇 Save everything globally (Pinia + localStorage)
+    authStore.setAuth(token, user);
 
     console.log(response.data);
 
@@ -267,7 +278,7 @@ const handleLogin = async () => {
     // Redirect to dashboard after short delay
     setTimeout(() => {
       router.push("/");
-    //    window.location.href = "/";
+      //window.location.href = "/";
     }, 1500);
 
   } catch (error) {
@@ -283,6 +294,7 @@ const handleLogin = async () => {
 
   } finally {
     // Always stop loading spinner
+     NProgress.done(); // stop loader when done
     loading.value = false;
   }
 };

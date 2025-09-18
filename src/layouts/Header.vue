@@ -236,12 +236,53 @@
                         </div>
                     </div>
 
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="../assets/images/users/avatar-1.jpg"
-                                    alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1" key="t-henry">Adroa Balinda</span>
-                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                    <div v-if="auth.isAuthenticated " class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                
+                                    <div v-if="user">
+                                        <img 
+                                        v-if="user.profile"
+                                            class="rounded-circle header-profile-user avatar-sm" 
+                                            src="../assets/images/users/avatar-1.jpg"
+                                            alt="Header Avatar"
+                                        />
+
+                                        <div class="avatar-sm " v-else>
+                                        <span class="avatar-title rounded-circle bg-primary font-size-16 bg-loader">
+                                            <strong class="text-uppercase">{{ user.name.split(' ').map(n => n[0]).join('').slice(0,2) }}</strong>
+
+                                        </span>
+                                        
+                                    </div>
+                                        
+                                    </div>
+                                     <div class="avatar-sm placeholder-glow" v-else>
+                                            <span class="avatar-title rounded-circle bg-dark-muted bg-loader font-size-16 placeholder">
+                                                <strong class="opacity-25">?</strong>
+                                            </span>
+                                        </div>
+                               <h5 class="text-left mb-0 mx-3 d-flex flex-column align-items-star text-capitalize">
+                                <div>
+                                    <!-- User name -->
+                                    <span v-if="user" class="d-inline-block d-xl-inline-block" key="t-henry">
+                                    {{ user.name }}
+                                    
+                                    </span>
+                                    <span v-else class="d-inline-block d-xl-inline-block placeholder-glow overflow-hidden" style="height: 15px;">
+                                        <span class="placeholder  col-8 me-1" ></span>
+                                         <span class="placeholder  col-3"></span>
+                                    </span>
+
+                                    <i class="mdi mdi-chevron-down d-inline-block d-xl-inline-block"></i>
+                                </div>
+
+                                <!-- User email -->
+                                <p class="fs-12 mb-0 text-muted" v-if="user">{{ user.email }}</p>
+                                <p class="fs-12 mb-0 text-muted placeholder-glow overflow-hidden" style="height: 15px;" v-else>
+                                    <span class="placeholder col-12"></span>
+                                </p>
+                                </h5>
+
                             </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
@@ -249,23 +290,68 @@
                             <a class="dropdown-item" href="my-logs.html"><i class="bx bx-time font-size-16 align-middle me-1"></i> <span key="t-profile">My Logs</span></a>
                             <a class="dropdown-item" href="auth-lock-screen.html"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">Lock screen</span></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="auth-login.html"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
+                            <a class="dropdown-item text-danger" href="javascript:void(0)" @click="handleLogout">
+                                <i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
+                                <span key="t-logout">Logout</span>
+                            </a>
+
                         </div>
                     </div>
+                    <div v-else>
+                        <!-- Show login button / redirect -->
+                        <router-link to="/login">Login</router-link>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </header>
 </template>
 
-<script>
-export default {
-    name:'Header',
-    setup () {
-        
+<script setup>
+import { ref, onMounted } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router"; // needed for redirect
 
-        return {}
+const user = ref(null);
+const auth = useAuthStore();
+const router = useRouter(); // access Vue Router
+
+// Handle logout
+const handleLogout = () => {
+  try {
+    // Clear Pinia store if it has a logout action
+    if (auth.logout) {
+      auth.logout();
     }
-}
+
+    // Always clear localStorage
+    localStorage.removeItem("authUser");
+    localStorage.removeItem("authToken");
+
+    console.log("✅ User logged out");
+
+    // Redirect to login
+    router.push("/login");
+  } catch (err) {
+    console.error("❌ Logout failed:", err);
+  }
+};
+
+onMounted(() => {
+  try {
+    const userJson = localStorage.getItem("authUser");
+    if (userJson) {
+      user.value = JSON.parse(userJson);
+      console.log("✅ User loaded from localStorage:", user.value);
+    } else {
+      console.warn("⚠️ No user found in localStorage");
+    }
+  } catch (err) {
+    console.error("❌ Failed to parse localStorage user:", err);
+    user.value = null;
+  }
+});
 </script>
 
 <style lang="scss" scoped>

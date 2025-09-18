@@ -1731,10 +1731,23 @@ hr{
 .fs-12{
     font-size: 12px !important;
 }
-.custom-file, .custom-select, .form-control, .form-select, input {
+.custom-select, .form-control, .form-select {
     color: #283c50;
     padding: 12px 15px;
     border-color: #e5e7eb;
     border-radius: 5px;
 }
+#nprogress .bar {
+  background: var(--bg-primary); /* your color */
+  height: 3px !important;
+  z-index: 99999 !important; /* highest layer */
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.my-custom-loader {
+  z-index: 1000; /* must be less than 99999 */
+}
+
         

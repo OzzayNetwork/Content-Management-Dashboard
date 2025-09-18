@@ -21,6 +21,8 @@ import PatnerAdd from "@/pages/Patners/PatnerAdd.vue";
 //test pages
 import PartnerTestList from "@/pages/Patners/Partner.List.Test.vue";
 
+//n progress importing into router
+
 // Define routes
 
 const routes = [

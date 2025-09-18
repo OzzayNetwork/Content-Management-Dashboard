@@ -6,6 +6,24 @@ import SideBar from "./layouts/Sidebar.vue";
 import FooterVue from "./layouts/Footer.vue";
 import MessageComposer from "./pages/Messenger/composeMessage.form.vue";
 
+import NProgress from "nprogress";
+import "nprogress/nprogress.css"; // default styles
+
+
+import router from "./router"; // your router file
+
+// Start loader before route changes
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
+});
+
+// Stop loader after route change
+router.afterEach(() => {
+  NProgress.done();
+});
+
+
 const route = useRoute();
 </script>
 
