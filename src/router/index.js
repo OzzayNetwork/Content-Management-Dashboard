@@ -5,6 +5,7 @@ import Login from "@/pages/Authentication/Auth.Login.vue";
 import ResetPassword from "@/pages/Authentication/Auth.resetPassword.vue";
 import AuthVerifyOtp from "../pages/Authentication/Auth.verify.otp.vue";
 
+
 // Import views
 import Home from "@/pages/Home.vue";
 import MenuCategories from "@/pages/PosMenus/MenuCategories.vue";
