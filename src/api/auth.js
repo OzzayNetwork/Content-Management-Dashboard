@@ -4,7 +4,7 @@ export default {
   // Login user and get token
   login(credentials) {
     // credentials = { username: "admin", password: "123456" }
-    return apiClient.post("/index.php?entity=auth", credentials);
+    return apiClient.post("/index.php?entity=auth&action=login", credentials);
   },
 
   // Logout (if supported by backend)

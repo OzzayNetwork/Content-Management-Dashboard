@@ -76,16 +76,10 @@
                         <i class="bx bx-dollar"></i> <span class="d-none d-md-inline">Ai Sui</span>
                     </a>
                 </div>
-
-
-             
-
-
-
-
+                <AIAgentDropdownMenu />
                 <div class="dropdown d-none d-lg-inline-block ms-1">
                     <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
-                        <i class="bx bx-fullscreen"></i>
+                        <i class="bx bx-fullscreen" data-bs-placement="top" title="Full Screen"></i>
                     </button>
                 </div>
 
@@ -95,7 +89,7 @@
                     <button type="button" class="btn header-item noti-icon waves-effect"
                         id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <i class="bx bx-bell bx-tada"></i>
+                        <i class="bx bx-bell bx-tada" data-bs-placement="top" title="System Notifications"></i>
                         <span class="badge bg-danger rounded-pill">3</span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
@@ -277,9 +271,12 @@
 
                             <div class="avatar-sm " v-else>
                                 <span class="avatar-title rounded-circle bg-primary font-size-16 bg-loader">
-                                    <strong class="text-uppercase">{{user.name.split(' ').map(n =>
-                                        n[0]).join('').slice(0, 2)}}</strong>
-
+                                    <strong class="text-uppercase">
+                                        {{
+                                            (user.first_name?.trim()?.charAt(0) || '?') +
+                                            (user.last_name?.trim()?.charAt(0) || '?')
+                                        }}
+                                    </strong>
                                 </span>
 
                             </div>
@@ -294,12 +291,12 @@
                             <div>
                                 <!-- User name -->
                                 <span v-if="user" class="d-inline-block d-xl-inline-block" key="t-henry">
-                                    {{ user.name }}
+                                    {{ user.first_name +" "+ user.last_name}}
 
                                 </span>
                                 <span v-else class="d-inline-block d-xl-inline-block placeholder-glow overflow-hidden"
                                     style="height: 15px; width: 150px;">
-                                    <span class="placeholder  col-8 me-1" ></span>
+                                    <span class="placeholder  col-8 me-1"></span>
                                     <span class="placeholder  col-3"></span>
                                 </span>
 
@@ -308,8 +305,8 @@
 
                             <!-- User email -->
                             <p class="fs-12 mb-0 text-muted text-lowercase" v-if="user">{{ user.email }}</p>
-                            <p class="fs-12 mb-0 text-muted placeholder-glow overflow-hidden" style="height: 15px; width: 150px;"
-                                v-else>
+                            <p class="fs-12 mb-0 text-muted placeholder-glow overflow-hidden"
+                                style="height: 15px; width: 150px;" v-else>
                                 <span class="placeholder col-12"></span>
                             </p>
                         </h5>
@@ -366,6 +363,7 @@
 import { ref, onMounted } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router"; // needed for redirect
+import AIAgentDropdownMenu from "@/pages/AiAgents/AI.agent.dropdown.menu.vue"
 
 const user = ref(null);
 const auth = useAuthStore();
