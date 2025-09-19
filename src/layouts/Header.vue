@@ -78,6 +78,76 @@
                 </div>
 
 
+               <div class="dropdown d-inline-block d-lg-inline-block ms-1">
+  <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    <i class="bx bx-customize"></i>
+  </button>
+  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+    <div class="dropdown-header fw-bold text-center border-bottom pb-3">
+      <h6 class="text-black mb-0">CS AI Agents Suit</h6>
+    </div>
+    <div class="px-lg-2 pt-2">
+      <div class="row g-0">
+        <div class="col-4">
+          <a class="dropdown-icon-item p-2" href="#"
+             data-bs-toggle="tooltip" data-bs-placement="top"
+             title="Access CSP AI Agent">
+            <img src="../assets/images/AI-agent/favicon.png" alt="CSP Agent">
+            <span>CSP Agent</span>
+          </a>
+        </div>
+        <div class="col-4">
+          <a class="dropdown-icon-item p-2" href="#"
+             data-bs-toggle="tooltip" data-bs-placement="top"
+             title="AI Agent for Homa Bay Executive">
+            <img src="../assets/images/AI-agent/homa-bay.png" alt="Homa Bay Executive">
+            <span>Homa Bay Executive</span>
+          </a>
+        </div>
+        <div class="col-4">
+          <a class="dropdown-icon-item p-2" href="#"
+             data-bs-toggle="tooltip" data-bs-placement="top"
+             title="AI Agent for Meru Executive">
+            <img src="../assets/images/AI-agent/county_logo.png" alt="Meru Executive">
+            <span>Meru Executive</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="row g-0">
+        <div class="col-4">
+          <a class="dropdown-icon-item p-2" href="#"
+             data-bs-toggle="tooltip" data-bs-placement="top"
+             title="KPLC AI Agent">
+            <img src="../assets/images/AI-agent/power.svg" alt="KPLC">
+            <span>KPLC</span>
+          </a>
+        </div>
+        <div class="col-4">
+          <a class="dropdown-icon-item p-2" href="#"
+             data-bs-toggle="tooltip" data-bs-placement="top"
+             title="AI Agent for Homa Bay Citizen">
+            <img src="../assets/images/AI-agent/homa-bay.png" alt="Homa Bay Citizen">
+            <span>Homa Bay Citizen</span>
+          </a>
+        </div>
+        <div class="col-4">
+          <a class="dropdown-icon-item p-2" href="#"
+             data-bs-toggle="tooltip" data-bs-placement="top"
+             title="AI Agent for Meru Citizen">
+            <img src="../assets/images/AI-agent/county_logo.png" alt="Meru Citizen">
+            <span>Meru Citizen</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
                 <div class="dropdown d-none d-lg-inline-block ms-1">
                     <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
@@ -274,7 +344,7 @@
                             <div class="avatar-sm " v-else>
                                 <span class="avatar-title rounded-circle bg-primary font-size-16 bg-loader">
                                     <strong class="text-uppercase">{{user.name.split(' ').map(n =>
-                                        n[0]).join('').slice(0,2) }}</strong>
+                                        n[0]).join('').slice(0, 2)}}</strong>
 
                                 </span>
 
@@ -294,8 +364,8 @@
 
                                 </span>
                                 <span v-else class="d-inline-block d-xl-inline-block placeholder-glow overflow-hidden"
-                                    style="height: 15px;">
-                                    <span class="placeholder  col-8 me-1"></span>
+                                    style="height: 15px; width: 150px;">
+                                    <span class="placeholder  col-8 me-1" ></span>
                                     <span class="placeholder  col-3"></span>
                                 </span>
 
@@ -304,7 +374,7 @@
 
                             <!-- User email -->
                             <p class="fs-12 mb-0 text-muted text-lowercase" v-if="user">{{ user.email }}</p>
-                            <p class="fs-12 mb-0 text-muted placeholder-glow overflow-hidden" style="height: 15px;"
+                            <p class="fs-12 mb-0 text-muted placeholder-glow overflow-hidden" style="height: 15px; width: 150px;"
                                 v-else>
                                 <span class="placeholder col-12"></span>
                             </p>
@@ -328,7 +398,7 @@
                         <a class="dropdown-item" href="auth-lock-screen.html">
                             <i class="bx bx-lock font-size-16 align-middle me-2"></i>
                             <span key="t-lock-screen">Lock Screen</span>
-                        </a>                    
+                        </a>
                         <!-- Change Password -->
                         <router-link class="dropdown-item" to="/Change-Password">
                             <i class="bx bx-key font-size-16 align-middle me-2"></i>

@@ -129,3 +129,4 @@ auth.initFromLocalStorage();
 
 // Mount the Vue app to the #app element in index.html
 app.mount('#app');
+

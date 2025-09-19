@@ -1739,7 +1739,7 @@ hr{
 }
 #nprogress .bar {
   background: var(--bg-primary); /* your color */
-  height: 3px !important;
+  height: 4px !important;
   z-index: 99999 !important; /* highest layer */
   position: fixed !important;
   top: 0;
@@ -1753,6 +1753,9 @@ hr{
     padding: 11px 20px;
     font-size: 14px;
     border-radius: 5px;
+}
+.dropdown-icon-item img{
+    height: 40px;
 }
 
         
