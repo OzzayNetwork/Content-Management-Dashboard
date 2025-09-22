@@ -291,20 +291,36 @@
                             </a>
                         </li>
 
-                        <li :class="{ 'mm-active': isActiveParent(['user-userlist.html', 'user-registration.html']) }">
-                            <a href="javascript: void(0);" class="waves-effect has-arrow">
-                                <i class="mdi mdi-monitor-multiple"></i>
-                                <span>System Users</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li :class="{ active: isCurrentPage('user-userlist.html') }">
-                                    <a href="user-userlist.html" class="waves-effect" :class="{ active: isCurrentPage('user-userlist.html') }">System Users</a>
-                                </li>
-                                <li :class="{ active: isCurrentPage('user-registration.html') }">
-                                    <a href="user-registration.html" class="waves-effect" :class="{ active: isCurrentPage('user-registration.html') }">Add a system user</a>
-                                </li>
-                            </ul>
+                       <li :class="{ 'mm-active': isActiveParent(['/users/list', '/users/register']) }">
+                        <a href="javascript:void(0);" class="waves-effect has-arrow">
+                            <i class="mdi mdi-monitor-multiple"></i>
+                            <span>System Users</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <!-- System Users List -->
+                            <li :class="{ active: isCurrentPage('/users/list') }">
+                            <router-link 
+                                to="/users/list" 
+                                class="waves-effect" 
+                                :class="{ active: isCurrentPage('/users/list') }"
+                            >
+                                System Users
+                            </router-link>
+                            </li>
+
+                            <!-- Add a System User -->
+                            <li :class="{ active: isCurrentPage('/users/register') }">
+                            <router-link 
+                                to="/users/register" 
+                                class="waves-effect" 
+                                :class="{ active: isCurrentPage('/users/register') }"
+                            >
+                                Add a System User
+                            </router-link>
+                            </li>
+                        </ul>
                         </li>
+
 
                     </ul>
                 </div>

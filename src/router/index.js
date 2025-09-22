@@ -6,6 +6,9 @@ import ResetPassword from "@/pages/Authentication/Auth.resetPassword.vue";
 import AuthVerifyOtp from "../pages/Authentication/Auth.verify.otp.vue";
 import AuthChangePassword from "../pages/Authentication/Auth.changePassword.vue";
 
+//user management
+import UserAdd from "../pages/SystemUsers/User.Add.vue";
+
 // Import views
 import Home from "@/pages/Home.vue";
 import MenuCategories from "@/pages/PosMenus/MenuCategories.vue";
@@ -109,6 +112,14 @@ const routes = [
     name: "NotFound",
     component: NotFound404,
     meta: {title: "Error 404 Page not Found"}
+  },
+
+  // user management pages (Adding User)
+  {
+    path: "/users/register",
+    name: "UserAdd",
+    component: UserAdd,
+    meta: {title: "Add New System Uer"}
   },
 ];
 

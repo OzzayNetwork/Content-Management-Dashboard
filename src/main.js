@@ -127,6 +127,14 @@ const auth = useAuthStore();
 // (e.g., load user info + token so refresh doesn’t log user out)
 auth.initFromLocalStorage();
 
+//enables focusing on form input elements with this property
+app.directive('focus', {
+  mounted(el) {
+    el.focus();
+  }
+});
+
+
 // Mount the Vue app to the #app element in index.html
 app.mount('#app');
 

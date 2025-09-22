@@ -1,29 +1,32 @@
-import apiClient from "./index";
+import apiClient from "./index.js";
 
 export default {
   // Fetch all partners
   getAll() {
-    return apiClient.get("/partners"); 
-    // 👆 adjust endpoint according to your API docs
+    return apiClient.get("/index.php", {
+      params: { entity: "partners" }
+    });
   },
 
   // Get single partner by ID
   getById(id) {
-    return apiClient.get(`/partners/${id}`);
+    return apiClient.get("/index.php", {
+      params: { entity: "partners", id }
+    });
   },
 
   // Create new partner
   create(partner) {
-    return apiClient.post("/partners", partner);
+    return apiClient.post("/index.php?entity=partners", partner);
   },
 
   // Update partner
   update(id, partner) {
-    return apiClient.put(`/partners/${id}`, partner);
+    return apiClient.put(`/index.php?entity=partners&id=${id}`, partner);
   },
 
   // Delete partner
   delete(id) {
-    return apiClient.delete(`/partners/${id}`);
+    return apiClient.delete(`/index.php?entity=partners&id=${id}`);
   }
 };
