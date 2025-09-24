@@ -17,12 +17,12 @@
         id="partnerOffcanvas"
         aria-labelledby="offcanvasRightLabel"
       >
-        <div class="offcanvas-header border-bottom py-0  pr-0">
+        <!-- Header -->
+        <div class="offcanvas-header border-bottom py-0 pr-0">
           <div class="d-flex align-items-center gap-2">
             <span class="text-muted">
               <button
                 type="button"
-                title="close Partnership details waves-effect"
                 class="btn btn-white position-relative p-0 avatar-sm rounded-circle"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
@@ -78,15 +78,18 @@
           <div
             class="w-100 d-flex align-items-center justify-content-center mb-0 p-3"
           >
-          <div class="">
-            <img v-if="partner?.logo_url"            
-              :src="partner?.logo_url"
-              class="img-fluid" 
-               alt="Company-logo"
-            >
-             <img v-else :src="fallbackLogo" />
-          </div>
-           
+            <div v-if="loading" class="placeholder-glow w-50 text-center">
+              <div class="placeholder col-6 rounded-circle" style="height:80px; width:80px;"></div>
+            </div>
+            <div v-else>
+              <img
+                v-if="partner?.logo_url"
+                :src="partner?.logo_url"
+                class="img-fluid"
+                alt="Company-logo"
+              />
+              <img v-else :src="fallbackLogo" class="img-fluid" />
+            </div>
           </div>
 
           <!-- Stats -->
@@ -129,62 +132,69 @@
 
           <div class="list-group">
             <div
-              class="list-group-item list-group-item-action"
-              aria-current="true"
+              v-if="loading"
+              class="list-group-item list-group-item-action placeholder-glow"
             >
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Partner Name</h5>
-                <small>{{ partner?.created_at }}</small>
+              <p class="placeholder col-8"></p>
+              <p class="placeholder col-6"></p>
+            </div>
+
+            <template v-else>
+              <div class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Partner Name</h5>
+                  <small>{{ partner?.created_at }}</small>
+                </div>
+                <p class="mb-1">{{ partner?.client_name || "-" }}</p>
+                <small class="text-muted">Organization Name</small>
               </div>
-              <p class="mb-1">{{ partner?.client_name || "-" }}</p>
-              <small class="text-muted">Organization Name</small>
-            </div>
 
-            <div class="list-group-item list-group-item-action">
-              <h5 class="mb-1">Abbreviation</h5>
-              <p class="mb-1">{{ partner?.client_abbreviation || "-" }}</p>
-              <small class="text-muted">Short form</small>
-            </div>
+              <div class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Abbreviation</h5>
+                <p class="mb-1">{{ partner?.client_abbreviation || "-" }}</p>
+                <small class="text-muted">Short form</small>
+              </div>
 
-            <div class="list-group-item list-group-item-action">
-              <h5 class="mb-1">Organization Type</h5>
-              <p class="mb-1">{{ partner?.client_type || "-" }}</p>
-              <small class="text-muted">Business category</small>
-            </div>
+              <div class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Organization Type</h5>
+                <p class="mb-1">{{ partner?.client_type || "-" }}</p>
+                <small class="text-muted">Business category</small>
+              </div>
 
-            <div class="list-group-item list-group-item-action">
-              <h5 class="mb-1">Country</h5>
-              <p class="mb-1">{{ partner?.partner_country || "N/A" }}</p>
-              <small class="text-muted">Location</small>
-            </div>
+              <div class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Country</h5>
+                <p class="mb-1">{{ partner?.partner_country || "N/A" }}</p>
+                <small class="text-muted">Location</small>
+              </div>
 
-            <div class="list-group-item list-group-item-action">
-              <h5 class="mb-1">Partnership Type</h5>
-              <p class="mb-1">{{ partner?.partnership_type || "-" }}</p>
-              <small class="text-muted">Collaboration level</small>
-            </div>
+              <div class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Partnership Type</h5>
+                <p class="mb-1">{{ partner?.partnership_type || "-" }}</p>
+                <small class="text-muted">Collaboration level</small>
+              </div>
 
-            <div class="list-group-item list-group-item-action">
-              <h5 class="mb-1">Products</h5>
-              <p class="mb-1">
-                <span
-                  v-for="(product, idx) in parsedProducts"
-                  :key="idx"
-                  class="badge bg-primary me-1"
-                  >{{ product }}</span
-                >
-              </p>
-              <small class="text-muted">Associated products</small>
-            </div>
+              <div class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Products</h5>
+                <p class="mb-1">
+                  <span
+                    v-for="(product, idx) in parsedProducts"
+                    :key="idx"
+                    class="badge bg-primary me-1"
+                    >{{ product }}</span
+                  >
+                </p>
+                <small class="text-muted">Associated products</small>
+              </div>
 
-            <div class="list-group-item list-group-item-action">
-              <h5 class="mb-1">Description</h5>
-              <p class="mb-1">
-                {{ partner?.client_description ||
-                "No description available." }}
-              </p>
-              <small class="text-muted">Partnership overview</small>
-            </div>
+              <div class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Description</h5>
+                <p class="mb-1">
+                  {{ partner?.client_description ||
+                  "No description available." }}
+                </p>
+                <small class="text-muted">Partnership overview</small>
+              </div>
+            </template>
           </div>
 
           <!-- Links -->
@@ -196,9 +206,13 @@
 
           <div class="list-group">
             <div
-              class="list-group-item list-group-item-action"
-              aria-current="true"
+              v-if="loading"
+              class="list-group-item list-group-item-action placeholder-glow"
             >
+              <p class="placeholder col-10"></p>
+              <p class="placeholder col-6"></p>
+            </div>
+            <div v-else class="list-group-item list-group-item-action">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ partner?.link_title || "Website" }}</h5>
                 <small>{{ partner?.updated_on || "N/A" }}</small>
@@ -232,6 +246,7 @@
 <script setup>
 import { ref, computed, watch } from "vue";
 import partnersApi from "@/api/partners.js";
+import NProgress from "nprogress";
 
 const props = defineProps({
   partnerId: {
@@ -242,11 +257,14 @@ const props = defineProps({
 
 const partner = ref(null);
 const loading = ref(false);
-const fallbackLogo = new URL('../../assets/images/icons/nope-not-here.avif', import.meta.url).href;
-
+const fallbackLogo = new URL(
+  "../../assets/images/icons/nope-not-here.avif",
+  import.meta.url
+).href;
 
 const fetchPartner = async (id) => {
   loading.value = true;
+  NProgress.start();
   try {
     const response = await partnersApi.getById(id);
     partner.value = response.data.data;
@@ -255,6 +273,7 @@ const fetchPartner = async (id) => {
     partner.value = null;
   } finally {
     loading.value = false;
+    NProgress.done();
   }
 };
 
@@ -269,9 +288,7 @@ watch(
 
 const parsedProducts = computed(() => {
   if (!partner.value?.products_used) return [];
-  return partner.value.products_used
-    .split(" and ")
-    .map((p) => p.trim());
+  return partner.value.products_used.split(" and ").map((p) => p.trim());
 });
 
 const sanitizedUrl = computed(() => {
