@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <button
-        class="btn btn-primary"
+        class="btn btn-primary d-none"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#partnerOffcanvas"

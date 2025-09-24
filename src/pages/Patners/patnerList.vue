@@ -232,6 +232,9 @@ import PatnerDetails from './patner.Details.vue';
 // ✅ Import partners API service
 import partnersApi from '@/api/partners';
 
+// import users API
+import usersApi from '@/api/users';
+
 // reactive state
 const isEmpty = ref(true);
 const isLoading = ref(true);
@@ -318,7 +321,8 @@ const onSearch = (e) => {
 // getting partner id
 const getPartnerId = (id) => {
   selectedPartnerId.value = id;
-  alert(selectedPartnerId.value)
+  //alert(selectedPartnerId.value)
+  
 };
 
 onMounted(() => {

@@ -1807,7 +1807,10 @@ tbody, td, tfoot, th, thead, tr{
 }
 .product-info{
     /* cursor: pointer; */
-    transition: .8;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.product-info:hover .circular-container-kev{
+    transform: scale(1.2);
 }
 .product-info:hover h5 a{
     color:#2164f3 !important;
