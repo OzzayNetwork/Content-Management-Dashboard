@@ -100,11 +100,13 @@
         <div class="card-body p-0">
           <div class="table-responsive">
             <table class="table verticle-align-middle table-hover">
-              <thead class="text-uppercase table-info">
+              <thead class="text-uppercase table-info table-primary">
                 <tr>
+
                   <th class="px-4">Partner Details</th>
-                  <th></th>
-                  <th>Description</th>
+
+                  <th>Partnership Description</th>
+                  <th>Products</th>
                   <th>Status</th>
                   <th>Added By</th>
                   <th>Clicks</th>
@@ -114,45 +116,72 @@
               <tbody>
                 <!-- dynamic rows -->
                 <tr v-for="partner in filteredPartners" :key="partner.id">
-                  <td class="px-4" width="200px">
-                    <div>
-                      <img
-                        v-if="partner.logo_url"
-                        :src="partner.logo_url"
-                        class="img-thumbnail bg-transparent"
-                        :alt="partner.client_name || 'Partner logo'"
-                        style="width: 200px; max-height: 70px;"
-                      />
-                      <img
-                        v-else
-                        :src="fallbackLogo"
-                        class="img-thumbnail bg-transparent"
-                        alt="fallback logo"
-                        style="width: 200px; max-height: 70px;"
-                      />
+                  <td class="">
+                    <div class="d-flex align-items-center gap-3 product-info">
+                      <div class="circular-container-kev" data-bs-toggle="offcanvas" data-bs-target="#partnerOffcanvas"
+                        @click="getPartnerId(partner.id)">
+                        <img v-if="partner.logo_url" :src="partner.logo_url" />
+                        <img v-else :src="fallbackLogo" />
+                      </div>
+                      <div>
+                        <h5 class="font-size-14 mb-1">
+                          <a href="#" class="link-dark" data-bs-toggle="offcanvas" data-bs-target="#partnerOffcanvas"
+                            @click="getPartnerId(partner.id)">
+                            {{ partner.client_name || 'Unnamed Partner' }}
+                          </a>
+                        </h5>
+                        <p class="text-muted mb-0 product-country">{{ partner.partner_country || 'N/A' }}</p>
+                        <div>
+                          <div class="product-list-action fs-12 d-flex align-items-center gap-3 mt-2" style="
+                              
+                          ">
+                            <a href="javascript:void(0);" data-bs-toggle="offcanvas" data-bs-target="#partnerOffcanvas"
+                              @click="getPartnerId(partner.id)">
+                              View
+                            </a>
+                            <span class="vr text-muted"></span>
+                            <a href="javascript:void(0);">Edit</a>
+                            <span class="vr text-muted"></span>
+                            <a href="javascript:void(0);" class="text-danger">Disable</a>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </td>
 
-                  <td>
-                    <div>
-                      <h5 class="font-size-14 mb-1">
-                        <a href="#" class="text-dark">{{ partner.client_name || 'Unnamed Partner' }}</a>
-                      </h5>
-                      <p class="text-muted mb-0">{{ partner.partner_country || 'N/A' }}</p>
-                    </div>
-                  </td>
+
 
                   <td>
                     <p class="m-0" :title="partner.client_description || ''">
                       {{ truncateText(partner.client_description || 'No description available.', 80) }}
                     </p>
                   </td>
+                  <td>
+                    <div class="d-flex gap-2">
+                      <div v-if="partner.products_used" class="badge-alt2 bg-gray-200 text-dark bg-primary-soft w-auto">
+                        {{ partner.products_used }}
+                      </div>
+
+                      <span v-else>
+                        -
+                      </span>
+                    </div>
+                  </td>
+
 
                   <td>
-                    <p class="mb-0 fw-bold text-truncate">
-                      <i class="mdi mdi-circle me-1" :class="partner.partner_status === 'Active' ? 'text-success' : 'text-danger'"></i>
-                      {{ partner.partner_status || 'Unknown' }}
-                    </p>
+
+                    <div class="form-check form-switch form-switch-md mb-0" dir="ltr"
+                      :title="partner.partner_status === 'Active' ? 'Disable Partner' : 'Enable Partner'"
+                      data-bs-toggle="tooltip" data-bs-placement="top">
+                      <input class="form-check-input" type="checkbox" role="switch"
+                        :id="`SwitchCheckSizelg${partner.id}`" :checked="partner.partner_status === 'Active'"
+                        @change="toggleStatus(partner)" />
+
+                    </div>
+
+
+
                   </td>
 
                   <td>
@@ -185,7 +214,8 @@
       </div>
 
       <!-- the details aside -->
-      <PatnerDetails />
+     <PatnerDetails :partner-id="selectedPartnerId"/>
+
     </div>
   </div>
 </template>
@@ -208,11 +238,12 @@ const isLoading = ref(true);
 const errorMessage = ref(null);
 const partners = ref([]);
 const searchTerm = ref("");
+const selectedPartnerId = ref(null);
 
 const router = useRouter();
 
 // fallback logo (Vite-friendly)
-const fallbackLogo = new URL('../../assets/images/clients/1.png', import.meta.url).href;
+const fallbackLogo = new URL('../../assets/images/icons/nope-not-here.avif', import.meta.url).href;
 
 // helper function to truncate text
 const truncateText = (text, limit = 100) => {
@@ -284,12 +315,16 @@ const onSearch = (e) => {
   searchTerm.value = e.target.value || "";
 };
 
+// getting partner id
+const getPartnerId = (id) => {
+  selectedPartnerId.value = id;
+  alert(selectedPartnerId.value)
+};
+
 onMounted(() => {
   document.title = 'List Of Partners - CSPL CRM';
   fetchPartners();
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

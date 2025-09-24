@@ -2,7 +2,6 @@
     <div class="row">
         <div class="col-12">
 
-
             <div class="offcanvas offcanvas-end " tabindex="-1" id="offCanvasKplc"
                 aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header border-bottom py-0  pr-0">

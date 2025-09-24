@@ -1713,6 +1713,7 @@ hr{
 .search-box .form-control{
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
+    border: 2px;
 }
 .offcanvas.offcanvas-end{
     border: 0px;
@@ -1757,5 +1758,76 @@ hr{
 .dropdown-icon-item img{
     height: 40px;
 }
+.card{
+    
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+}
+tbody, td, tfoot, th, thead, tr{
+    border-color: #ced4da;
+}
+.form-switch-md .form-check-input{
+    background-color: #ced4da;
+}
+.form-check-input:checked {
+    background-color: #556ee6;
+    border-color: #556ee6;
+}
 
-        
+.circular-container-kev {
+  width: 65px;           /* adjust as needed */
+  height: 65px;          /* must be equal to width */
+  border-radius: 50%;     /* makes it a perfect circle */
+  overflow: hidden;       /* ensures the image stays inside */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;    /* optional: background color */
+  border: none; /* optional: border */
+  flex-shrink: 0;  
+}
+
+.circular-container-kev img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;  
+  transform: scale(1.2);  /* keeps aspect ratio */
+}   
+
+.badge-alt2 {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 6px;
+    border-radius: 3px;
+    display: inline-block;   /* shrink to fit content */
+  flex: 0 0 auto;          /* flex shorthand: don’t grow, don’t shrink, size = auto */
+  width: auto;  
+}
+.bg-soft-primary {
+    background-color: #ebeefa !important;
+}
+.product-info{
+    /* cursor: pointer; */
+    transition: .8;
+}
+.product-info:hover h5 a{
+    color:#2164f3 !important;
+}
+.product-info:hover p{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.product-list-action {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+}
+
+.product-info:hover .product-list-action{
+   width: auto;
+    height: auto;
+    opacity: 1;
+}
+.product-info img{
+    cursor: pointer;
+}
