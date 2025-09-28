@@ -157,16 +157,25 @@
                     </p>
                   </td>
                   <td>
-                    <div class="d-flex gap-2">
-                      <div v-if="partner.products_used" class="badge-alt2 bg-gray-200 text-dark bg-primary-soft w-auto">
-                        {{ partner.products_used }}
-                      </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                      <template v-if="partner.products_used && partner.products_used.length">
+                        <!-- Show up to first two products -->
+                        <div v-for="(product, index) in partner.products_used.slice(0, 2)" :key="index"
+                          class="badge-alt2 bg-gray-200 text-dark bg-primary-soft w-auto">
+                          {{ product }}
+                        </div>
 
-                      <span v-else>
-                        -
-                      </span>
+                        <!-- If there are more than 2, show +n -->
+                        <div v-if="partner.products_used.length > 2"
+                          class="badge-alt2 bg-gray-200 text-dark bg-secondary-soft w-auto">
+                          +{{ partner.products_used.length - 2 }}
+                        </div>
+                      </template>
+
+                      <span v-else>-</span>
                     </div>
                   </td>
+
 
 
                   <td>
@@ -214,7 +223,7 @@
       </div>
 
       <!-- the details aside -->
-     <PatnerDetails :partner-id="selectedPartnerId"/>
+      <PatnerDetails :partner-id="selectedPartnerId" />
 
     </div>
   </div>
@@ -242,6 +251,7 @@ const errorMessage = ref(null);
 const partners = ref([]);
 const searchTerm = ref("");
 const selectedPartnerId = ref(null);
+const userIds = ref(null)
 
 const router = useRouter();
 
@@ -322,7 +332,7 @@ const onSearch = (e) => {
 const getPartnerId = (id) => {
   selectedPartnerId.value = id;
   //alert(selectedPartnerId.value)
-  
+
 };
 
 onMounted(() => {

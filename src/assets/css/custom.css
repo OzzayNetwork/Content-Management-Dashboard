@@ -1834,3 +1834,17 @@ tbody, td, tfoot, th, thead, tr{
 .product-info img{
     cursor: pointer;
 }
+.profile-pic-btn{
+    height: 55px;
+    width: 55px;
+    position: absolute;
+    bottom: 16px;
+    right: 5%;
+    border: 4px solid white;
+    font-size: 20px;
+}
+
+/* the offline container */
+.offline-container{
+  z-index: 100000;
+}

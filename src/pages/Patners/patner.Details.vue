@@ -37,6 +37,28 @@
 
           <div>
             <div class="d-flex header-action-btn">
+
+              <!-- status update -->
+               <div
+                  class="d-flex ms-1 align-items-center justify-content-center"
+                  :title="partner?.partner_status === 'Active' ? 'Disable Partner' : 'Enable Partner'"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                >
+                  <div class="form-check form-switch form-switch-md mb-0" dir="ltr">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      :id="`SwitchCheckSizelg${partner?.id}`"
+                      v-model="partnerActive"
+                      @change="toggleStatus(partner)"
+                    />
+
+                    <label class="form-check-label" :for="`SwitchCheckSizelg${partner?.id}`"></label>
+                  </div>
+                </div>
+
               <!-- Edit -->
               <div
                 class="d-inline-block d-lg-inline-block ms-1"
@@ -136,7 +158,10 @@
               class="list-group-item list-group-item-action placeholder-glow"
             >
               <p class="placeholder col-8"></p>
-              <p class="placeholder col-6"></p>
+              <p class="placeholder col-6 "></p>
+
+              <p class="placeholder col-12 "></p>
+              <p class="placeholder col-10"></p>
             </div>
 
             <template v-else>
@@ -179,10 +204,12 @@
                   <span
                     v-for="(product, idx) in parsedProducts"
                     :key="idx"
-                    class="badge bg-primary me-1"
-                    >{{ product }}</span
+                    class="badge-alt2 bg-gray-200 text-dark bg-primary-soft w-auto  me-1"
                   >
+                    {{ product }}
+                  </span>
                 </p>
+
                 <small class="text-muted">Associated products</small>
               </div>
 
@@ -193,6 +220,16 @@
                   "No description available." }}
                 </p>
                 <small class="text-muted">Partnership overview</small>
+              </div>
+
+               <div class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Added By</h5>
+                <p class="mb-1">
+                  {{ partner?.created_by ||
+                  "User's information is not available." }}
+                </p>
+                <small class="text-muted">This Partner was added on {{ partner?.created_at }}</small>
+
               </div>
             </template>
           </div>
@@ -276,6 +313,13 @@ const fetchPartner = async (id) => {
     NProgress.done();
   }
 };
+const partnerActive = computed({
+  get: () => partner.value?.partner_status === "Active",
+  set: (val) => {
+    partner.value.partner_status = val ? "Active" : "Inactive";
+  },
+});
+
 
 // Refetch when ID changes
 watch(
@@ -286,10 +330,8 @@ watch(
   { immediate: true }
 );
 
-const parsedProducts = computed(() => {
-  if (!partner.value?.products_used) return [];
-  return partner.value.products_used.split(" and ").map((p) => p.trim());
-});
+const parsedProducts = computed(() => partner.value?.products_used || []);
+
 
 const sanitizedUrl = computed(() => {
   if (!partner.value?.link_url) return "#";

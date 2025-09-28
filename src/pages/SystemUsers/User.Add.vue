@@ -32,26 +32,28 @@
 
       <div class="col-sm-12 col-lg-8 offset-lg-2">
         <div class="card">
-          <div class="card-header">
+          <div class="card-header d-none">
             <h4 class="card-title">New User Registration</h4>
             <p class="card-title-desc text-muted mb-0">
               Register a new system user with appropriate role and status.
             </p>
           </div>
 
-          <div class="card-body">
+           <div class="card-header text-center px-5">
+            <h4 class="card-title">New User Registration</h4>
+            <p class="card-title-desc text-muted mb-0">
+              Register a new system user with appropriate role and status.
+            </p>
+          </div>
+
+          <div class="card-body p-5">
             <div class="row">
               <!-- Profile Picture -->
-              <div class="col-12 mb-3">
+              <div class="col-12 mb-3 d-none">
                 <div class="d-flex">
                   <div class="mb-0 d-flex align-items-center justify-content-center">
                     <img class="rounded-circle avatar-xl" :src="previewUrl" alt="">
-                    <ImageUploader
-                      inputId="profilePicUpload"
-                      @image-selected="handleImageSelected"
-                      @show-toast="handleToast"
-                      :aspect-ratio="selectedRatio"
-                    />
+                    
                   </div>
                   <div class="d-flex align-items-center">
                     <div class="text-muted d-flex flex-column align-items-start justify-content-center">
@@ -70,6 +72,29 @@
                       </label>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="col-12 mb-3">
+                <div class="w-100 d-flex justify-content-center align-items-center mb-5 flex-column">
+                   <div class="profile-pic-cont position-relative">
+                      <img class="rounded-circle avatar-xl" :src="previewUrl" alt="" style="width: 200px; height: 200px;"/>
+                      <label for="profilePicUpload" type="button" class="btn btn-primary  waves-effect waves-light rounded-circle profile-pic-btn" data-bs-toggle="tooltip" title="Select Profile Picture" fdprocessedid="0yglcf" ><i class="bx bx-camera align-middle"></i></label>
+
+                      <!-- image croping component -->
+                       <ImageUploader
+                        inputId="profilePicUpload"
+                        @image-selected="handleImageSelected"
+                        @show-toast="handleToast"
+                        :aspect-ratio="selectedRatio"
+                      />
+                   </div>
+                   <div class="text-center mt-3 row align-items-center justify-content-center">
+                      <div class="col-sm-12 col-12 col-md-10 col-lg-8 col-xl-7">
+                        <h5 class="mb-1 text-black">Upload Profile Picture</h5>
+                      <p class="text-muted">Please upload a clear and professional image. Accepted formats: PNG, SVG, or JPEG. <strong>Maximum file size: 2 MB.</strong></p>
+                      </div>
+                    </div>
+
                 </div>
               </div>
 
@@ -189,19 +214,19 @@
           </div>
 
           <!-- Footer -->
-          <div class="card-footer bg-white border-top d-flex justify-content-end py-3">
+          <div class="card-footer bg-white border-top d-flex justify-content-end px-5 pb-5 pt-0 text-center border-0">
             <div class="col-12">
               <div class="d-flex justify-content-end gap-2">
                 <button
                   type="button"
-                  class="btn btn-outline-secondary waves-effect"
+                  class="btn btn-outline-secondary waves-effect btn-lg"
                   @click="cancelForm"
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
-                  class="btn btn-dark waves-effect"
+                  class="btn btn-dark waves-effect btn-lg"
                   @click="saveUser"
                 >
                   Save User
@@ -239,7 +264,7 @@ const statuses = [
 import avatar from "@/assets/images/image-placeholder.jpg";
 
 const previewUrl = ref(avatar);
-const selectedRatio = ref(null);
+const selectedRatio = ref(5/5);
 
 function handleImageSelected(newImageUrl) {
   previewUrl.value = newImageUrl;

@@ -5,6 +5,7 @@ import HeaderVue from "./layouts/Header.vue";
 import SideBar from "./layouts/Sidebar.vue";
 import FooterVue from "./layouts/Footer.vue";
 import MessageComposer from "./pages/Messenger/composeMessage.form.vue";
+import OfflineBunner from "./pages/ErrorPages/Offline.Bunner.vue"
 
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -45,6 +46,7 @@ const route = useRoute();
 
 <template>
   <LoaderVue />
+  <!-- <OfflineBunner/> -->
 
   <!-- If route is login, just render the login component -->
   <div v-if="route.meta.layout === 'none'">
